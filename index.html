@@ -1,0 +1,2867 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ellabib شركة اللبيب للخدمات المالية</title>
+    <style>
+        /* style.css content starts here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            direction: rtl; /* Right-to-left for Arabic */
+            text-align: right;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 250px; /* Adjust logo size as needed */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .capital-display {
+            background-color: #e0f2f7;
+            border: 1px solid #b3e0ed;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 1.5em;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .capital-display label {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        #currentCapital {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1.8em;
+        }
+
+        /* Navigation Buttons Styling */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            background-color: #6c757d; /* Default grey */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            flex: 1; /* Allow buttons to grow */
+            min-width: 180px; /* Minimum width for buttons */
+            text-align: center;
+        }
+        .nav-button:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        .nav-button.active {
+            background-color: #007bff; /* Blue for active button */
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .form-section, .transactions-section, .card-management-section, .expense-log-section, .libyan-dinar-deposit-section, .card-reservation-history-section { /* Updated sections */
+            background-color: #fdfdfd;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 30px;
+            display: none; /* Hidden by default, controlled by JS */
+        }
+        /* Show initial section on load (or via JS) */
+        .card-management-section.active-section {
+            display: block;
+        }
+
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="tel"],
+        .form-group input[type="date"], /* Added date type */
+        .form-group select,
+        .form-group textarea { /* Added textarea */
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .form-group textarea {
+            min-height: 80px; /* Adjust height for textarea */
+            resize: vertical; /* Allow vertical resize */
+        }
+
+        button[type="submit"], button.action-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover, button.action-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .card-form-buttons, .transaction-form-buttons, .expense-form-buttons, .libyan-dinar-deposit-form-buttons, .card-reservation-form-buttons, .modify-capital-form-buttons { /* Added new form buttons */
+            display: flex;
+            gap: 10px;
+        }
+        .card-form-buttons button, .transaction-form-buttons button, .expense-form-buttons button, .libyan-dinar-deposit-form-buttons button, .card-reservation-form-buttons button, .modify-capital-form-buttons button { /* Added new form buttons */
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        table th, table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: right;
+        }
+
+        table th {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr.clickable-row:hover {
+            background-color: #e9f7fe;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Print button specific style */
+        .print-button {
+            background-color: #28a745; /* Green color for print */
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            margin-bottom: 15px;
+            float: left; /* Align to left (right in RTL) */
+            margin-left: 10px; /* Space from other elements */
+        }
+        .print-button:hover {
+            background-color: #218838;
+        }
+        /* Clear float for next elements */
+        .section-header-with-print {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .section-header-with-print h2 {
+            margin-bottom: 0; /* Remove default h2 margin */
+        }
+
+
+        /* Custom Modal/Message Box CSS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure modals are on top */
+            display: none; /* Hidden by default */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeInScale 0.3s ease-out forwards;
+        }
+
+        .modal-content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        .modal-button:hover {
+            background-color: #0056b3;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-button-yes {
+            background-color: #28a745;
+        }
+
+        .modal-button-yes:hover {
+            background-color: #218838;
+        }
+
+        .modal-button-no {
+            background-color: #dc3545;
+        }
+
+        .modal-button-no:hover {
+            background-color: #c82333;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .capital-display {
+                font-size: 1.2em;
+                flex-direction: column;
+                align-items: center;
+            }
+            #currentCapital {
+                font-size: 1.5em;
+            }
+            /* Simplified responsive table display for transactions and cards */
+            table {
+                border: none; /* Remove outer border */
+            }
+            table thead {
+                display: none; /* Hide table headers on small screens */
+            }
+            table tbody, table tr, table td {
+                display: block;
+                width: 100%; /* Make each row and cell take full width */
+            }
+            table tr {
+                margin-bottom: 15px;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                display: flex; /* Use flexbox for inner cell layout */
+                flex-direction: column; /* Stack cells vertically */
+                padding: 10px;
+            }
+            table td {
+                border: none; /* Remove cell borders */
+                text-align: right; /* Default text alignment */
+                padding: 5px 0; /* Adjust padding */
+                display: flex; /* Use flex for label and value */
+                justify-content: space-between;
+                align-items: baseline;
+            }
+            table td:last-child {
+                justify-content: center; /* Center action button */
+                padding-top: 15px;
+                border-top: 1px solid #eee; /* Separator for action button */
+            }
+            table td::before {
+                content: attr(data-label); /* Show data-label as pseudo-element */
+                font-weight: bold;
+                margin-left: 10px; /* Space between label and value */
+                color: #555;
+                flex-shrink: 0; /* Prevent label from shrinking */
+            }
+        }
+
+        /* New styles for clickable card details */
+        .card-display-cell {
+            cursor: pointer;
+            color: #007bff; /* To indicate it's clickable */
+            font-weight: bold; /* Card holder name bold */
+            padding-right: 15px; /* Add some padding to avoid text touching the edge */
+        }
+        .card-display-cell span {
+            display: block; /* Make bank name appear on new line */
+            font-weight: normal; /* Bank name thinner */
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Styles for card details modal */
+        #cardDetailsModal .modal-content, #transactionDetailsModal .modal-content, #expenseDetailsModal .modal-content, #libyanDinarDepositDetailsModal .modal-content, #cardReservationDetailsModal .modal-content, #geminiAnalysisModal .modal-content, #financialTipsModal .modal-content, #modifyCapitalModal .modal-content { /* Updated modal */
+            text-align: right; /* Align text to right for Arabic */
+            max-width: 600px; /* Increased max-width for transactions list */
+            width: 95%;
+        }
+        #cardDetailsModal .modal-content h3, #transactionDetailsModal .modal-content h3, #expenseDetailsModal .modal-content h3, #libyanDinarDepositDetailsModal .modal-content h3, #cardReservationDetailsModal .modal-content h3, #geminiAnalysisModal .modal-content h3, #financialTipsModal .modal-content h3, #modifyCapitalModal .modal-content h3 { /* Updated modal */
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        /* New style for individual detail items in modals */
+        .modal-detail-item {
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px; /* Add padding below each item */
+            border-bottom: 1px solid #eee; /* Subtle separator */
+        }
+        /* Remove margin-bottom from the last item to avoid double spacing before close button */
+        .modal-detail-item:last-of-type {
+            margin-bottom: 0;
+            border-bottom: none; /* No border for the very last item */
+        }
+
+        #cardDetailsModal .modal-content p strong, #transactionDetailsModal .modal-content p strong, #expenseDetailsModal .modal-content p strong, #libyanDinarDepositDetailsModal .modal-content p strong, #cardReservationDetailsModal .modal-content p strong, #geminiAnalysisModal .modal-content p strong, #financialTipsModal .modal-content p strong, #modifyCapitalModal .modal-content p strong {
+            flex-shrink: 0;
+            margin-left: 10px;
+            color: #333;
+        }
+        #cardDetailsModal .modal-content span, #transactionDetailsModal .modal-content span, #expenseDetailsModal .modal-content span, #libyanDinarDepositDetailsModal .modal-content span, #cardReservationDetailsModal .modal-content span, #geminiAnalysisModal .modal-content span, #financialTipsModal .modal-content span, #modifyCapitalModal .modal-content span {
+            text-align: left; /* Align value to left */
+            flex-grow: 1;
+            font-weight: 500; /* Make values slightly bolder for readability */
+        }
+
+        /* Ensure the close button is well-separated from the content */
+        #modalTransactionDetailsCloseButton, #modalExpenseDetailsCloseButton, #modalCardDetailsCloseButton, #modalLibyanDinarDepositDetailsCloseButton, #modalCardReservationDetailsCloseButton, #modalGeminiAnalysisCloseButton, #modalFinancialTipsCloseButton, #modalModifyCapitalCloseButton { /* Updated modal */
+            margin-top: 25px; /* Add more space above the close button */
+        }
+
+        /* Styles for transactions list within card details modal */
+        #cardDetailsModal .transactions-list-container, #transactionDetailsModal .transaction-details-section, #expenseDetailsModal .expense-details-section, #libyanDinarDepositDetailsModal .deposit-details-section, #cardReservationDetailsModal .reservation-details-section, #geminiAnalysisModal .analysis-content, #financialTipsModal .tips-content, #modifyCapitalModal .modify-capital-section { /* Updated modal */
+            margin-top: 25px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        #cardDetailsModal .transactions-list-container h4, #transactionDetailsModal .transaction-details-section h4, #expenseDetailsModal .expense-details-section h4, #libyanDinarDepositDetailsModal .deposit-details-section h4, #cardReservationDetailsModal .reservation-details-section h4, #geminiAnalysisModal .analysis-content h4, #financialTipsModal .tips-content h4, #modifyCapitalModal .modify-capital-section h4 { /* Updated modal */
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        #cardDetailsModal .transaction-item, #transactionDetailsModal .transaction-detail-item, #expenseDetailsModal .expense-detail-item, #libyanDinarDepositDetailsModal .deposit-detail-item, #cardReservationDetailsModal .reservation-detail-item, #geminiAnalysisModal .analysis-item, #financialTipsModal .tips-item, #modifyCapitalModal .modify-capital-item { /* Updated modal */
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #444;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 5px;
+        }
+        #cardDetailsModal .transaction-item strong, #transactionDetailsModal .transaction-detail-item strong, #expenseDetailsModal .expense-detail-item strong, #libyanDinarDepositDetailsModal .deposit-detail-item strong, #cardReservationDetailsModal .reservation-detail-item strong, #geminiAnalysisModal .analysis-item strong, #financialTipsModal .tips-item strong, #modifyCapitalModal .modify-capital-item strong { /* Updated modal */
+            color: #222;
+        }
+        #cardDetailsModal .transaction-item .transaction-detail, #transactionDetailsModal .transaction-detail-item div, #expenseDetailsModal .expense-detail-item div, #libyanDinarDepositDetailsModal .deposit-detail-item div, #cardReservationDetailsModal .reservation-detail-item div, #geminiAnalysisModal .analysis-item div, #financialTipsModal .tips-item div, #modifyCapitalModal .modify-capital-item div { /* Updated modal */
+            flex: 1 1 48%; /* Allows two items per row on wider screens, wraps on smaller */
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+        #cardDetailsModal .transaction-item .transaction-detail:last-child {
+            flex: 1 1 100%; /* Make last item (profit/payment) take full width */
+        }
+        #cardDetailsModal .no-transactions, #transactionDetailsModal .no-transactions, #expenseDetailsModal .no-expenses, #libyanDinarDepositDetailsModal .no-deposits, #cardReservationDetailsModal .no-reservations, #geminiAnalysisModal .no-analysis, #financialTipsModal .no-tips, #modifyCapitalModal .no-modify-capital { /* Updated modal and no-deposits */
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+
+        /* Style for the total profit summary */
+        .total-profit-summary, .expense-summary-box, .libyan-dinar-deposit-summary-box, .card-reservation-summary-box { /* Updated summary box */
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #155724;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+        }
+        .expense-summary-box.red, .libyan-dinar-deposit-summary-box.red, .card-reservation-summary-box.red { /* Updated summary box */
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .expense-summary-container, .libyan-dinar-deposit-summary-container, .card-reservation-summary-container { /* Updated summary container */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .expense-summary-container .expense-summary-box, .libyan-dinar-deposit-summary-container .libyan-dinar-deposit-summary-box, .card-reservation-summary-container .card-reservation-summary-box { /* Updated summary box */
+            flex: 1 1 45%; /* Allow two items per row */
+            min-width: 250px;
+            font-size: 1.1em;
+        }
+
+        /* Responsive table adjustments for expense log */
+        @media (max-width: 768px) {
+            .expense-summary-container .expense-summary-box, .libyan-dinar-deposit-summary-container .libyan-dinar-deposit-summary-box, .card-reservation-summary-container .card-reservation-summary-box {
+                flex: 1 1 100%; /* Stack boxes on small screens */
+            }
+        }
+
+        /* Print specific styles */
+        @media print {
+            body > *:not(.modal-overlay) { /* Hide everything except the modal overlay */
+                display: none !important;
+            }
+            .modal-overlay {
+                position: static; /* Remove fixed positioning for print */
+                background-color: transparent; /* No background for print */
+                display: flex !important; /* Ensure modal is visible */
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: auto; /* Adjust height for content */
+            }
+            .modal-content {
+                box-shadow: none; /* Remove shadow for print */
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+                width: 100%;
+                animation: none; /* No animation for print */
+                text-align: right; /* Ensure text alignment for print */
+            }
+            .modal-button {
+                display: none !important; /* Hide close button during print */
+            }
+            h1, h2, h3 {
+                text-align: center;
+                color: #000; /* Black text for print */
+            }
+            /* Ensure modal details are visible and formatted for print */
+            .modal-detail-item {
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 5px;
+                margin-bottom: 5px;
+            }
+            .modal-detail-item:last-of-type {
+                border-bottom: none;
+            }
+            .no-print {
+                display: none !important; /* Hide elements with this class during print */
+            }
+        }
+
+        /* style.css content ends here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="IMG_4946.png" alt="Ellabib Logo" onerror="this.onerror=null;this.src='https://placehold.co/250x100/A0A0A0/FFFFFF?text=Ellabib+Logo';">
+        </div>
+        <h1>Ellabib<br>شركة اللبيب للخدمات المالية</h1>
+
+        <div class="capital-display">
+            <label for="currentCapital">رأس المال الحالي:</label>
+            <span id="currentCapital">0.00</span> د.ل
+        </div>
+        <div style="text-align: center; margin-bottom: 15px; font-size: 0.9em; color: #666;">
+            <span id="userIdDisplay">جاري التحميل...</span>
+        </div>
+
+        <!-- Main Application Content (always visible now) -->
+        <div id="appContent" class="app-content" style="display: block;">
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <button id="navCardsButton" class="nav-button active">إدارة البطاقات</button>
+                <button id="navCardReservationHistoryButton" class="nav-button">تاريخ حجز بطاقات</button>
+                <button id="navLibyanDinarDepositButton" class="nav-button">إيداع بالدينار الليبي</button>
+                <button id="navTransactionFormButton" class="nav-button">إدخال معاملة</button>
+                <button id="navTransactionsLogButton" class="nav-button">سجل المعاملات</button>
+                <button id="navExpensesButton" class="nav-button">سجلات المصروفات والإيرادات</button>
+                <button id="navModifyCapitalButton" class="nav-button">تعديل رأس المال</button> <!-- New Button -->
+            </div>
+
+            <!-- Card Management Section -->
+            <div id="cardManagementSection" class="card-management-section active-section">
+                <div class="section-header-with-print">
+                    <h2>إدارة البطاقات المسجلة</h2>
+                    <button class="print-button" onclick="printSection('cardManagementSection')">طباعة</button>
+                </div>
+                <form id="cardRegistrationForm">
+                    <div class="form-group">
+                        <label for="regCardHolderName">اسم صاحب البطاقة:</label>
+                        <input type="text" id="regCardHolderName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regBankName">اسم المصرف:</label>
+                        <input type="text" id="regBankName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regNationalId">الرقم الوطني:</label>
+                        <input type="text" id="regNationalId" pattern="[0-9]*" title="الرجاء إدخال أرقام فقط" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regAccountNumber">رقم الحساب:</label>
+                        <input type="text" id="regAccountNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPhoneNumber">رقم الهاتف:</label>
+                        <input type="tel" id="regPhoneNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="regContactPhoneNumber" placeholder="للتواصل رقم">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPurchasePrice">سعر شراء البطاقة بالدينار:</label>
+                        <input type="number" id="regPurchasePrice" step="0.01" required>
+                    </div>
+
+                    <div class="card-form-buttons">
+                        <button type="submit">تسجيل بطاقة جديدة</button>
+                        <button type="button" id="clearCardFormButton" class="delete-btn">مسح الحقول</button>
+                    </div>
+                </form>
+
+                <h3>قائمة البطاقات المسجلة</h3>
+                <table id="registeredCardsTable">
+                    <thead>
+                        <tr>
+                            <th>الرقم</th>
+                            <th>اسم صاحب البطاقة والمصرف</th>
+                            <th>سعر الشراء</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registeredCardsTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Card Reservation History Section (New Section) -->
+            <div id="cardReservationHistorySection" class="form-section card-reservation-history-section">
+                <div class="section-header-with-print">
+                    <h2>تاريخ حجز بطاقات</h2>
+                    <button class="print-button" onclick="printSection('cardReservationHistorySection')">طباعة</button>
+                </div>
+                <form id="cardReservationForm">
+                    <div class="form-group">
+                        <label for="cardReservationCardSelection">اختر البطاقة:</label>
+                        <select id="cardReservationCardSelection" required>
+                            <option value="">اختر بطاقة مسجلة</option>
+                        </select>
+                    </div>
+                    <!-- Display selected card's details (read-only) for reservation -->
+                    <div id="selectedCardReservationDetails" style="margin-bottom: 15px; padding: 10px; background-color: #f0f0f0; border-radius: 5px; display: none;">
+                        <strong>اسم صاحب البطاقة:</strong> <span id="displayCardReservationCardHolderName"></span><br>
+                        <strong>اسم المصرف:</strong> <span id="displayCardReservationBankName"></span><br>
+                        <strong>الرقم الوطني:</strong> <span id="displayCardReservationNationalId"></span><br>
+                        <strong>رقم الحساب:</strong> <span id="displayCardReservationAccountNumber"></span><br>
+                        <strong>رقم الهاتف:</strong> <span id="displayCardReservationPhoneNumber"></span><br>
+                        <strong>رقم التواصل:</strong> <span id="displayCardReservationContactPhoneNumber"></span><br>
+                        <strong>سعر الشراء:</strong> <span id="displayCardReservationPurchasePrice"></span> د.ل
+                    </div>
+                    <div class="form-group">
+                        <label for="reservationDateInput">تاريخ الحجز:</label>
+                        <input type="date" id="reservationDateInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reservationNote">ملاحظة (اختياري):</label>
+                        <textarea id="reservationNote" placeholder="أضف ملاحظة حول الحجز"></textarea>
+                    </div>
+                    <div class="card-reservation-form-buttons">
+                        <button type="submit">إضافة حجز</button>
+                        <button type="button" id="clearCardReservationFormButton" class="delete-btn">مسح الحقول</button>
+                    </div>
+                </form>
+
+                <h3>سجل حجز البطاقات</h3>
+                <div class="card-reservation-summary-container">
+                    <div class="card-reservation-summary-box">
+                        <label>إجمالي عدد البطاقات المحجوزة:</label>
+                        <span id="totalCardReservationsDisplay">0</span>
+                    </div>
+                </div>
+                <table id="cardReservationHistoryTable">
+                    <thead>
+                        <tr>
+                            <th>الرقم</th>
+                            <th>التاريخ</th>
+                            <th>البطاقة (صاحب/مصرف)</th>
+                            <th>تاريخ الحجز</th>
+                            <th>الملاحظة</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cardReservationHistoryTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Libyan Dinar Deposit Section -->
+            <div id="libyanDinarDepositSection" class="form-section libyan-dinar-deposit-section">
+                <div class="section-header-with-print">
+                    <h2>إيداع بالدينار الليبي</h2>
+                    <button class="print-button" onclick="printSection('libyanDinarDepositSection')">طباعة</button>
+                </div>
+                <form id="libyanDinarDepositForm">
+                    <div class="form-group">
+                        <label for="libyanDinarDepositCardSelection">اختر البطاقة:</label>
+                        <select id="libyanDinarDepositCardSelection" required>
+                            <option value="">اختر بطاقة مسجلة</option>
+                        </select>
+                    </div>
+                    <!-- Display selected card's details (read-only) for libyan dinar deposit -->
+                    <div id="selectedLibyanDinarDepositCardDetails" style="margin-bottom: 15px; padding: 10px; background-color: #f0f0f0; border-radius: 5px; display: none;">
+                        <strong>اسم صاحب البطاقة:</strong> <span id="displayLibyanDinarDepositCardHolderName"></span><br>
+                        <strong>اسم المصرف:</strong> <span id="displayLibyanDinarDepositBankName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="libyanDinarDepositAmount">قيمة الإيداع بالدينار الليبي:</label>
+                        <input type="number" id="libyanDinarDepositAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="libyanDinarDepositNote">ملاحظة (اختياري):</label>
+                        <textarea id="libyanDinarDepositNote" placeholder="أضف ملاحظة حول الإيداع بالدينار الليبي"></textarea>
+                    </div>
+                    <div class="libyan-dinar-deposit-form-buttons">
+                        <button type="submit">إضافة إيداع بالدينار الليبي</button>
+                        <button type="button" id="clearLibyanDinarDepositFormButton" class="delete-btn">مسح الحقول</button>
+                    </div>
+                </form>
+
+                <h3>سجل الإيداعات بالدينار الليبي</h3>
+                <div class="libyan-dinar-deposit-summary-container">
+                    <div class="libyan-dinar-deposit-summary-box red">
+                        <label>إجمالي الإيداعات بالدينار الليبي:</label>
+                        <span id="totalLibyanDinarDepositsDisplay">0.00</span> د.ل
+                    </div>
+                </div>
+                <table id="libyanDinarDepositTable">
+                    <thead>
+                        <tr>
+                            <th>الرقم</th>
+                            <th>التاريخ</th>
+                            <th>البطاقة (صاحب/مصرف)</th>
+                            <th>المبلغ (د.ل)</th>
+                            <th>الملاحظة</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="libyanDinarDepositTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Transaction Input Section -->
+            <div id="transactionFormSection" class="form-section">
+                <div class="section-header-with-print">
+                    <h2>إدخال بيانات المعاملة</h2>
+                    <button class="print-button" onclick="printSection('transactionFormSection')">طباعة</button>
+                </div>
+                <form id="transactionForm">
+                    <div class="form-group">
+                        <label for="transactionType">نوع المعاملة:</label>
+                        <select id="transactionType" required>
+                            <option value="">اختر النوع</option>
+                            <option value="شراء">شراء</option>
+                            <option value="بيع">بيع</option>
+                        </select>
+                    </div>
+
+                    <!-- Card Selection for Transaction -->
+                    <div class="form-group">
+                        <label for="cardSelection">اختر البطاقة:</label>
+                        <select id="cardSelection" required>
+                            <option value="">اختر بطاقة مسجلة</option>
+                        </select>
+                    </div>
+
+                    <!-- Display selected card's details (read-only) -->
+                    <div id="selectedCardDetails" style="margin-bottom: 15px; padding: 10px; background-color: #f0f0f0; border-radius: 5px; display: none;">
+                        <strong>اسم صاحب البطاقة:</strong> <span id="displayCardHolderName"></span><br>
+                        <strong>اسم المصرف:</strong> <span id="displayBankName"></span><br>
+                        <strong>الرقم الوطني:</strong> <span id="nationalId"></span><br>
+                        <strong>رقم الحساب:</strong> <span id="displayAccountNumber"></span><br>
+                        <strong>رقم الهاتف:</strong> <span id="displayPhoneNumber"></span><br>
+                        <strong>رقم التواصل:</strong> <span id="displayContactPhoneNumber"></span><br>
+                        <strong>سعر الشراء:</strong> <span id="displayCardPurchasePrice"></span> د.ل
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usdAmount">عدد الدولارات داخل البطاقة (افتراضي 2000):</label>
+                        <input type="number" id="usdAmount" step="0.01" value="2000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discountRate">نسبة الخصم من البطاقة (%):</label>
+                        <input type="number" id="discountRate" step="0.01" value="4.8" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usdSalePrice">سعر بيع الدولار (دينار/دولار):</label>
+                        <input type="number" id="usdSalePrice" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentMethod">طريقة الدفع:</label>
+                        <select id="paymentMethod" required>
+                            <option value="">اختر الطريقة</option>
+                            <option value="كاش">كاش</option>
+                            <option value="شيك">شيك</option>
+                        </select>
+                    </div>
+                    
+                    <div class="transaction-form-buttons">
+                        <button type="submit">إضافة معاملة</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Transactions Log Section -->
+            <div id="transactionsLogSection" class="transactions-section">
+                <div class="section-header-with-print">
+                    <h2>سجل المعاملات وتتبع المكاسب</h2>
+                    <button class="print-button" onclick="printSection('transactionsLogSection')">طباعة</button>
+                </div>
+                <div class="total-profit-summary">
+                    <label>مجموع المكاسب من المعاملات:</label>
+                    <span id="totalTransactionsProfit">0.00</span> د.ل
+                </div>
+                <button id="analyzeTransactionsButton" class="action-button" style="margin-bottom: 20px;">تحليل المعاملات ✨</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>رقم</th>
+                            <th>التاريخ</th>
+                            <th>البطاقة (صاحب/مصرف)</th>
+                            <th>النوع</th>
+                            <th>المكسب (د.ل)</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsTableBody">
+                        </tbody>
+                </table>
+            </div>
+
+            <!-- Expense Log Section -->
+            <div id="expenseLogSection" class="expense-log-section">
+                <div class="section-header-with-print">
+                    <h2>سجلات المصروفات والإيرادات الأخرى</h2>
+                    <button class="print-button" onclick="printSection('expenseLogSection')">طباعة</button>
+                </div>
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <label for="expenseType">نوع الحركة:</label>
+                        <select id="expenseType" required>
+                            <option value="">اختر النوع</option>
+                            <option value="إيراد">إيراد (دخول)</option>
+                            <option value="مصروف">مصروف (خروج)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">المبلغ (د.ل):</label>
+                        <input type="number" id="expenseAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseNote">الملاحظة:</label>
+                        <textarea id="expenseNote" placeholder="اكتب ملاحظاتك هنا (مثلاً: إيجار المكتب، بيع أصل، مكافأة)"></textarea>
+                    </div>
+                    <div class="expense-form-buttons">
+                        <button type="submit">إضافة حركة</button>
+                        <button type="button" id="clearExpenseFormButton" class="delete-btn">مسح الحقول</button>
+                    </div>
+                </form>
+
+                <h3>ملخص المصروفات والإيرادات</h3>
+                <div class="expense-summary-container">
+                    <div class="expense-summary-box">
+                        <label>إجمالي الإيرادات:</label>
+                        <span id="totalIncomeDisplay">0.00</span> د.ل
+                    </div>
+                    <div class="expense-summary-box red">
+                        <label>إجمالي المصروفات:</label>
+                        <span id="totalExpensesDisplay">0.00</span> د.ل
+                    </div>
+                </div>
+                <button id="getFinancialTipsButton" class="action-button" style="margin-bottom: 20px;">نصائح مالية ✨</button>
+                <h3>سجل المصروفات والإيرادات</h3>
+                <table id="expenseTable">
+                    <thead>
+                        <tr>
+                            <th>الرقم</th>
+                            <th>التاريخ</th>
+                            <th>النوع</th>
+                            <th>المبلغ (د.ل)</th>
+                            <th>الملاحظة</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenseTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Details Modal Structure -->
+    <div id="cardDetailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalCardHolderName"></h3>
+            <p class="modal-detail-item"><strong>اسم المصرف:</strong> <span id="modalBankName"></span></p>
+            <p class="modal-detail-item"><strong>الرقم الوطني:</strong> <span id="modalNationalId"></span></p>
+            <p class="modal-detail-item"><strong>رقم الحساب:</strong> <span id="modalAccountNumber"></span></p>
+            <p class="modal-detail-item"><strong>رقم الهاتف:</strong> <span id="modalPhoneNumber"></span></p>
+            <p class="modal-detail-item"><strong>رقم التواصل:</strong> <span id="modalContactPhoneNumber"></span></p>
+            <p class="modal-detail-item"><strong>سعر الشراء:</strong> <span id="modalCardPurchasePrice"></span> د.ل</p>
+            <p class="modal-detail-item"><strong>تاريخ التسجيل:</strong> <span id="modalRegistrationDate"></span></p>
+
+            <div class="transactions-list-container">
+                <h4>سجل المعاملات المرتبطة</h4>
+                <div id="cardTransactionsList">
+                    <!-- Transactions for this card will be loaded here -->
+                    <p class="no-transactions">لا توجد معاملات مسجلة لهذه البطاقة.</p>
+                </div>
+            </div>
+
+            <button id="modalCardDetailsCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Transaction Details Modal Structure -->
+    <div id="transactionDetailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalTransactionTitle">تفاصيل المعاملة</h3>
+            <div class="transaction-details-section">
+                <p class="modal-detail-item"><strong>الرقم:</strong> <span id="modalTransNumber"></span></p>
+                <p class="modal-detail-item"><strong>التاريخ:</strong> <span id="modalTransDate"></span></p>
+                <p class="modal-detail-item"><strong>النوع:</strong> <span id="modalTransType"></span></p>
+                <p class="modal-detail-item"><strong>صاحب البطاقة:</strong> <span id="modalTransCardHolderName"></span></p>
+                <p class="modal-detail-item"><strong>المصرف:</strong> <span id="modalTransBankName"></span></p>
+                <p class="modal-detail-item"><strong>الرقم الوطني:</strong> <span id="modalTransNationalId"></span></p>
+                <p class="modal-detail-item"><strong>رقم الحساب:</strong> <span id="modalTransAccountNumber"></span></p>
+                <p class="modal-detail-item"><strong>رقم الهاتف:</strong> <span id="modalTransPhoneNumber"></span></p>
+                <p class="modal-detail-item"><strong>رقم التواصل:</strong> <span id="modalTransContactPhoneNumber"></span></p>
+                <p class="modal-detail-item"><strong>سعر الشراء (د.ل):</strong> <span id="modalTransPurchasePrice"></span></p>
+                <p class="modal-detail-item"><strong>عدد الدولارات داخل البطاقة (افتراضي 2000):</strong> <span id="modalTransUsdAmount"></span></p>
+                <p class="modal-detail-item"><strong>نسبة الخصم من البطاقة (%):</strong> <span id="modalTransDiscountRate"></span></p>
+                <p class="modal-detail-item"><strong>صافي الدولارات:</strong> <span id="modalTransNetUsd"></span></p>
+                <p class="modal-detail-item"><strong>سعر بيع الدولار (دينار/دولار):</strong> <span id="modalTransUsdSalePrice"></span></p>
+                <p class="modal-detail-item"><strong>سعر البيع المحسوب (د.ل):</strong> <span id="modalTransCalculatedSalePrice"></span></p>
+                <p class="modal-detail-item"><strong>إجمالي المدفوع (د.ل):</strong> <span id="modalTransTotalPaid"></span></p>
+                <p class="modal-detail-item"><strong>المكسب (د.ل):</strong> <span id="modalTransProfit"></span></p>
+                <p class="modal-detail-item"><strong>طريقة الدفع:</strong> <span id="modalTransPaymentMethod"></span></p>
+                <p class="modal-detail-item"><strong>إجمالي الإيداعات بالدينار الليبي المرتبطة:</strong> <span id="modalTransLibyanDinarDepositsInvolved"></span> د.ل</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button print-button" onclick="printModal('transactionDetailsModal')">طباعة التفاصيل</button>
+                <button id="modalTransactionDetailsCloseButton" class="modal-button">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expense Details Modal Structure -->
+    <div id="expenseDetailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalExpenseTitle">تفاصيل الحركة</h3>
+            <div class="expense-details-section">
+                <p class="modal-detail-item"><strong>الرقم:</strong> <span id="modalExpenseNumber"></span></p>
+                <p class="modal-detail-item"><strong>التاريخ:</strong> <span id="modalExpenseDate"></span></p>
+                <p class="modal-detail-item"><strong>النوع:</strong> <span id="modalExpenseType"></span></p>
+                <p class="modal-detail-item"><strong>المبلغ (د.ل):</strong> <span id="modalExpenseAmount"></span></p>
+                <p class="modal-detail-item"><strong>الملاحظة:</strong> <span id="modalExpenseNote"></span></p>
+            </div>
+            <button id="modalExpenseDetailsCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Libyan Dinar Deposit Details Modal Structure -->
+    <div id="libyanDinarDepositDetailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalLibyanDinarDepositTitle">تفاصيل الإيداع بالدينار الليبي</h3>
+            <div class="deposit-details-section">
+                <p class="modal-detail-item"><strong>الرقم:</strong> <span id="modalLibyanDinarDepositNumber"></span></p>
+                <p class="modal-detail-item"><strong>التاريخ:</strong> <span id="modalLibyanDinarDepositDate"></span></p>
+            <p class="modal-detail-item"><strong>صاحب البطاقة:</strong> <span id="modalLibyanDinarDepositCardHolderName"></span></p>
+            <p class="modal-detail-item"><strong>المصرف:</strong> <span id="modalLibyanDinarDepositBankName"></span></p>
+                <p class="modal-detail-item"><strong>المبلغ (د.ل):</strong> <span id="modalLibyanDinarDepositAmount"></span></p>
+                <p class="modal-detail-item"><strong>الملاحظة:</strong> <span id="modalLibyanDinarDepositNote"></span></p>
+            </div>
+            <button id="modalLibyanDinarDepositDetailsCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Card Reservation Details Modal Structure (New) -->
+    <div id="cardReservationDetailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalCardReservationTitle">تفاصيل الحجز</h3>
+            <div class="reservation-details-section">
+                <p class="modal-detail-item"><strong>الرقم:</strong> <span id="modalCardReservationNumber"></span></p>
+                <p class="modal-detail-item"><strong>تاريخ الإدخال:</strong> <span id="modalCardReservationEntryDate"></span></p>
+                <p class="modal-detail-item"><strong>صاحب البطاقة:</strong> <span id="modalCardReservationCardHolderName"></span></p>
+                <p class="modal-detail-item"><strong>المصرف:</strong> <span id="modalCardReservationBankName"></span></p>
+                <p class="modal-detail-item"><strong>الرقم الوطني:</strong> <span id="modalCardReservationNationalId"></span></p>
+                <p class="modal-detail-item"><strong>رقم الحساب:</strong> <span id="modalCardReservationAccountNumber"></span></p>
+                <p class="modal-detail-item"><strong>رقم الهاتف:</strong> <span id="modalCardReservationPhoneNumber"></span></p>
+                <p class="modal-detail-item"><strong>رقم التواصل:</strong> <span id="modalCardReservationContactPhoneNumber"></span></p>
+                <p class="modal-detail-item"><strong>سعر الشراء:</strong> <span id="modalCardReservationPurchasePrice"></span> د.ل</p>
+                <p class="modal-detail-item"><strong>تاريخ الحجز:</strong> <span id="modalCardReservationDate"></span></p>
+                <p class="modal-detail-item"><strong>الملاحظة:</strong> <span id="modalCardReservationNote"></span></p>
+            </div>
+            <button id="modalCardReservationDetailsCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Gemini Analysis Modal Structure -->
+    <div id="geminiAnalysisModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="geminiAnalysisTitle">تحليل المعاملات بواسطة Gemini</h3>
+            <div id="geminiAnalysisContent" class="analysis-content" style="white-space: pre-wrap; text-align: right;">
+                <!-- LLM response will be inserted here -->
+                <p class="no-analysis">جاري تحليل المعاملات...</p>
+            </div>
+            <button id="modalGeminiAnalysisCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Financial Tips Modal Structure -->
+    <div id="financialTipsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="financialTipsTitle">نصائح مالية بواسطة Gemini</h3>
+            <div id="financialTipsContent" class="tips-content" style="white-space: pre-wrap; text-align: right;">
+                <!-- LLM response will be inserted here -->
+                <p class="no-tips">جاري تحليل وضعك المالي وتقديم النصائح...</p>
+            </div>
+            <button id="modalFinancialTipsCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Modify Capital Modal Structure (New) -->
+    <div id="modifyCapitalModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>تعديل رأس المال الحالي</h3>
+            <div class="modify-capital-section">
+                <p class="modal-detail-item"><strong>رأس المال الحالي:</strong> <span id="currentCapitalInModal">0.00</span> د.ل</p>
+                <form id="modifyCapitalForm">
+                    <div class="form-group">
+                        <label for="newCapitalAmount">المبلغ الجديد لرأس المال (د.ل):</label>
+                        <input type="number" id="newCapitalAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="capitalAdjustmentNote">ملاحظة التعديل (اختياري):</label>
+                        <textarea id="capitalAdjustmentNote" placeholder="سبب التعديل (إضافة، سحب، تصحيح)"></textarea>
+                    </div>
+                    <div class="modify-capital-form-buttons">
+                        <button type="submit">تحديث رأس المال</button>
+                    </div>
+                </form>
+            </div>
+            <button id="modalModifyCapitalCloseButton" class="modal-button">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase configuration and initialization
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+
+        let app;
+        let db;
+        let auth;
+        let userId;
+        let isAuthReady = false;
+
+        // Global data arrays (will be populated from Firestore)
+        window.currentCapital = 0.00;
+        window.cards = [];
+        window.transactions = [];
+        window.expenses = [];
+        window.libyanDinarDeposits = [];
+        window.cardReservationHistory = [];
+
+        // Get DOM elements for Capital Display
+        const currentCapitalDisplay = document.getElementById('currentCapital');
+        const userIdDisplay = document.getElementById('userIdDisplay');
+
+        // Get DOM elements for Navigation
+        const navCardsButton = document.getElementById('navCardsButton');
+        const navCardReservationHistoryButton = document.getElementById('navCardReservationHistoryButton');
+        const navLibyanDinarDepositButton = document.getElementById('navLibyanDinarDepositButton');
+        const navTransactionFormButton = document.getElementById('navTransactionFormButton');
+        const navTransactionsLogButton = document.getElementById('navTransactionsLogButton');
+        const navExpensesButton = document.getElementById('navExpensesButton'); 
+        const navModifyCapitalButton = document.getElementById('navModifyCapitalButton'); // New
+
+        // Sections
+        const cardManagementSection = document.getElementById('cardManagementSection');
+        const cardReservationHistorySection = document.getElementById('cardReservationHistorySection');
+        const libyanDinarDepositSection = document.getElementById('libyanDinarDepositSection');
+        const transactionFormSection = document.getElementById('transactionFormSection');
+        const transactionsLogSection = document.getElementById('transactionsLogSection');
+        const expenseLogSection = document.getElementById('expenseLogSection');
+
+        // Get DOM elements for Card Registration Form
+        const cardRegistrationForm = document.getElementById('cardRegistrationForm');
+        const regCardHolderNameInput = document.getElementById('regCardHolderName');
+        const regBankNameInput = document.getElementById('regBankName');
+        const regNationalIdInput = document.getElementById('regNationalId');
+        const regAccountNumberInput = document.getElementById('regAccountNumber');
+        const regPhoneNumberInput = document.getElementById('regPhoneNumber');
+        const regContactPhoneNumberInput = document.getElementById('regContactPhoneNumber'); 
+        const regPurchasePriceInput = document.getElementById('regPurchasePrice'); 
+        const registeredCardsTableBody = document.getElementById('registeredCardsTableBody');
+        const clearCardFormButton = document.getElementById('clearCardFormButton');
+
+        // Get DOM elements for Transaction Form
+        const transactionForm = document.getElementById('transactionForm');
+        const transactionTypeInput = document.getElementById('transactionType');
+        const cardSelectionInput = document.getElementById('cardSelection');
+        const selectedCardDetailsDiv = document.getElementById('selectedCardDetails');
+        const displayCardHolderName = document.getElementById('displayCardHolderName');
+        const displayBankName = document.getElementById('displayBankName');
+        const displayNationalId = document.getElementById('nationalId');
+        const displayAccountNumber = document.getElementById('displayAccountNumber');
+        const displayPhoneNumber = document.getElementById('displayPhoneNumber');
+        const displayContactPhoneNumber = document.getElementById('displayContactPhoneNumber'); 
+        const displayCardPurchasePrice = document.getElementById('displayCardPurchasePrice'); 
+
+        const usdAmountInput = document.getElementById('usdAmount');
+        const discountRateInput = document.getElementById('discountRate');
+        const usdSalePriceInput = document.getElementById('usdSalePrice');
+        const paymentMethodInput = document.getElementById('paymentMethod');
+        const transactionsTableBody = document.getElementById('transactionsTableBody');
+        const totalTransactionsProfitDisplay = document.getElementById('totalTransactionsProfit');
+        const modalTransLibyanDinarDepositsInvolved = document.getElementById('modalTransLibyanDinarDepositsInvolved');
+
+        // Get DOM elements for Expense Form
+        const expenseForm = document.getElementById('expenseForm');
+        const expenseTypeInput = document.getElementById('expenseType');
+        const expenseAmountInput = document.getElementById('expenseAmount');
+        const expenseNoteInput = document.getElementById('expenseNote');
+        const expenseTableBody = document.getElementById('expenseTableBody');
+        const totalIncomeDisplay = document.getElementById('totalIncomeDisplay');
+        const totalExpensesDisplay = document.getElementById('totalExpensesDisplay');
+        const clearExpenseFormButton = document.getElementById('clearExpenseFormButton');
+
+        // Get DOM elements for Libyan Dinar Deposit Form
+        const libyanDinarDepositForm = document.getElementById('libyanDinarDepositForm');
+        const libyanDinarDepositCardSelection = document.getElementById('libyanDinarDepositCardSelection');
+        const selectedLibyanDinarDepositCardDetails = document.getElementById('selectedLibyanDinarDepositCardDetails');
+        const displayLibyanDinarDepositCardHolderName = document.getElementById('displayLibyanDinarDepositCardHolderName');
+        const displayLibyanDinarDepositBankName = document.getElementById('displayLibyanDinarDepositBankName'); 
+        const libyanDinarDepositAmountInput = document.getElementById('libyanDinarDepositAmount');
+        const libyanDinarDepositNoteInput = document.getElementById('libyanDinarDepositNote');
+        const clearLibyanDinarDepositFormButton = document.getElementById('clearLibyanDinarDepositFormButton');
+        const libyanDinarDepositTableBody = document.getElementById('libyanDinarDepositTableBody');
+        const totalLibyanDinarDepositsDisplay = document.getElementById('totalLibyanDinarDepositsDisplay');
+
+        // Get DOM elements for Card Reservation History Form
+        const cardReservationForm = document.getElementById('cardReservationForm');
+        const cardReservationCardSelection = document.getElementById('cardReservationCardSelection');
+        const selectedCardReservationDetails = document.getElementById('selectedCardReservationDetails');
+        const displayCardReservationCardHolderName = document.getElementById('displayCardReservationCardHolderName');
+        const displayCardReservationBankName = document.getElementById('displayCardReservationBankName');
+        const displayCardReservationNationalId = document.getElementById('displayCardReservationNationalId');
+        const displayCardReservationAccountNumber = document.getElementById('displayCardReservationAccountNumber');
+        const displayCardReservationPhoneNumber = document.getElementById('displayCardReservationPhoneNumber');
+        const displayCardReservationContactPhoneNumber = document.getElementById('displayCardReservationContactPhoneNumber');
+        const displayCardReservationPurchasePrice = document.getElementById('displayCardReservationPurchasePrice');
+        const reservationDateInput = document.getElementById('reservationDateInput'); 
+        const reservationNoteInput = document.getElementById('reservationNote');
+        const clearCardReservationFormButton = document.getElementById('clearCardReservationFormButton');
+        const cardReservationHistoryTableBody = document.getElementById('cardReservationHistoryTableBody');
+        const totalCardReservationsDisplay = document.getElementById('totalCardReservationsDisplay');
+
+
+        // Get DOM elements for Card Details Modal
+        const cardDetailsModal = document.getElementById('cardDetailsModal');
+        const modalCardHolderName = document.getElementById('modalCardHolderName');
+        const modalBankName = document.getElementById('modalBankName');
+        const modalNationalId = document.getElementById('modalNationalId');
+        const modalAccountNumber = document.getElementById('modalAccountNumber');
+        const modalPhoneNumber = document.getElementById('modalPhoneNumber');
+        const modalContactPhoneNumber = document.getElementById('modalContactPhoneNumber');
+        const modalCardPurchasePrice = document.getElementById('modalCardPurchasePrice'); 
+        const modalRegistrationDate = document.getElementById('modalRegistrationDate'); 
+        const modalCardDetailsCloseButton = document.getElementById('modalCardDetailsCloseButton');
+        const cardTransactionsList = document.getElementById('cardTransactionsList');
+
+        // Get DOM elements for Transaction Details Modal
+        const transactionDetailsModal = document.getElementById('transactionDetailsModal');
+        const modalTransactionTitle = document.getElementById('modalTransactionTitle');
+        const modalTransNumber = document.getElementById('modalTransNumber');
+        const modalTransDate = document.getElementById('modalTransDate');
+        const modalTransType = document.getElementById('modalTransType');
+        const modalTransCardHolderName = document.getElementById('modalTransCardHolderName');
+        const modalTransBankName = document.getElementById('modalTransBankName');
+        const modalTransNationalId = document.getElementById('modalTransNationalId');
+        const modalTransAccountNumber = document.getElementById('modalTransAccountNumber');
+        const modalTransPhoneNumber = document.getElementById('modalTransPhoneNumber');
+        const modalTransContactPhoneNumber = document.getElementById('modalTransContactPhoneNumber'); 
+        const modalTransPurchasePrice = document.getElementById('modalTransPurchasePrice'); 
+        const modalTransUsdAmount = document.getElementById('modalTransUsdAmount');
+        const modalTransDiscountRate = document.getElementById('modalTransDiscountRate');
+        const modalTransNetUsd = document.getElementById('modalTransNetUsd');
+        const modalTransUsdSalePrice = document.getElementById('modalTransUsdSalePrice');
+        const modalTransCalculatedSalePrice = document.getElementById('modalTransCalculatedSalePrice');
+        const modalTransTotalPaid = document.getElementById('modalTransTotalPaid');
+        const modalTransProfit = document.getElementById('modalTransProfit');
+        const modalTransPaymentMethod = document.getElementById('modalTransPaymentMethod');
+        const modalTransactionDetailsCloseButton = document.getElementById('modalTransactionDetailsCloseButton');
+
+        // Get DOM elements for Expense Details Modal
+        const expenseDetailsModal = document.getElementById('expenseDetailsModal');
+        const modalExpenseTitle = document.getElementById('modalExpenseTitle');
+        const modalExpenseNumber = document.getElementById('modalExpenseNumber');
+        const modalExpenseDate = document.getElementById('modalExpenseDate');
+        const modalExpenseType = document.getElementById('modalExpenseType');
+        const modalExpenseAmount = document.getElementById('modalExpenseAmount');
+        const modalExpenseNote = document.getElementById('modalExpenseNote');
+        const modalExpenseDetailsCloseButton = document.getElementById('modalExpenseDetailsCloseButton');
+
+        // Get DOM elements for Libyan Dinar Deposit Details Modal
+        const libyanDinarDepositDetailsModal = document.getElementById('libyanDinarDepositDetailsModal');
+        const modalLibyanDinarDepositTitle = document.getElementById('modalLibyanDinarDepositTitle');
+        const modalLibyanDinarDepositNumber = document.getElementById('modalLibyanDinarDepositNumber');
+        const modalLibyanDinarDepositDate = document.getElementById('modalLibyanDinarDepositDate');
+        const modalLibyanDinarDepositCardHolderName = document.getElementById('modalLibyanDinarDepositCardHolderName');
+        const modalLibyanDinarDepositBankName = document.getElementById('modalLibyanDinarDepositBankName'); 
+        const modalLibyanDinarDepositAmount = document.getElementById('modalLibyanDinarDepositAmount');
+        const modalLibyanDinarDepositNote = document.getElementById('modalLibyanDinarDepositNote');
+        const modalLibyanDinarDepositDetailsCloseButton = document.getElementById('modalLibyanDinarDepositDetailsCloseButton');
+
+        // Get DOM elements for Card Reservation Details Modal
+        const cardReservationDetailsModal = document.getElementById('cardReservationDetailsModal');
+        const modalCardReservationTitle = document.getElementById('modalCardReservationTitle');
+        const modalCardReservationNumber = document.getElementById('modalCardReservationNumber');
+        const modalCardReservationEntryDate = document.getElementById('modalCardReservationEntryDate');
+        const modalCardReservationCardHolderName = document.getElementById('modalCardReservationCardHolderName');
+        const modalCardReservationBankName = document.getElementById('modalCardReservationBankName');
+        const modalCardReservationNationalId = document.getElementById('modalCardReservationNationalId');
+        const modalCardReservationAccountNumber = document.getElementById('modalCardReservationAccountNumber');
+        const modalCardReservationPhoneNumber = document.getElementById('modalCardReservationPhoneNumber');
+        const modalCardReservationContactPhoneNumber = document.getElementById('modalCardReservationContactPhoneNumber'); 
+        const modalCardReservationPurchasePrice = document.getElementById('modalCardReservationPurchasePrice');
+        const modalCardReservationDate = document.getElementById('modalCardReservationDate'); 
+        const modalCardReservationNote = document.getElementById('modalCardReservationNote');
+        const modalCardReservationDetailsCloseButton = document.getElementById('modalCardReservationDetailsCloseButton');
+
+        // Get DOM elements for Gemini Analysis Modal
+        const analyzeTransactionsButton = document.getElementById('analyzeTransactionsButton');
+        const geminiAnalysisModal = document.getElementById('geminiAnalysisModal');
+        const geminiAnalysisContent = document.getElementById('geminiAnalysisContent');
+        const modalGeminiAnalysisCloseButton = document.getElementById('modalGeminiAnalysisCloseButton');
+
+        // Get DOM elements for Financial Tips Modal
+        const getFinancialTipsButton = document.getElementById('getFinancialTipsButton');
+        // FIX: Removed accidental assignment to 'document'
+        const financialTipsModal = document.getElementById('financialTipsModal');
+        const financialTipsContent = document.getElementById('financialTipsContent');
+        const modalFinancialTipsCloseButton = document.getElementById('modalFinancialTipsCloseButton');
+
+        // Get DOM elements for Modify Capital Modal (New)
+        const modifyCapitalModal = document.getElementById('modifyCapitalModal');
+        const currentCapitalInModal = document.getElementById('currentCapitalInModal');
+        const modifyCapitalForm = document.getElementById('modifyCapitalForm');
+        const newCapitalAmountInput = document.getElementById('newCapitalAmount');
+        const capitalAdjustmentNoteInput = document.getElementById('capitalAdjustmentNote');
+        const modalModifyCapitalCloseButton = document.getElementById('modalModifyCapitalCloseButton');
+
+
+        // --- Helper Function for Dinar Formatting ---
+        window.formatDinar = function(amount) {
+            return new Intl.NumberFormat('ar-LY', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(amount);
+        };
+
+        // --- Custom Message/Confirm Modals ---
+        // These functions create and manage custom modal dialogs for messages and confirmations,
+        // replacing browser's default alert/confirm which are not allowed in Canvas.
+        window.createMessageModal = function() {
+            const modalHtml = `
+                <div id="customMessageModal" class="modal-overlay">
+                    <div class="modal-content">
+                        <p id="modalMessageText"></p>
+                        <button id="modalCloseButton" class="modal-button">إغلاق</button>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            document.getElementById('modalCloseButton').onclick = window.hideMessageModal;
+        };
+
+        window.displayMessage = function(message, type = 'info') {
+            let modal = document.getElementById('customMessageModal');
+            if (!modal) {
+                window.createMessageModal();
+                modal = document.getElementById('customMessageModal');
+            }
+            const messageText = document.getElementById('modalMessageText');
+            messageText.textContent = message;
+            messageText.style.color = type === 'error' ? '#dc3545' : (type === 'success' ? '#28a745' : '#007bff');
+            modal.style.display = 'flex';
+        };
+
+        window.hideMessageModal = function() {
+            const modal = document.getElementById('customMessageModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        let confirmCallback = null; // Stores the callback function for confirmation modal
+
+        window.createConfirmModal = function() {
+            const modalHtml = `
+                <div id="customConfirmModal" class="modal-overlay">
+                    <div class="modal-content">
+                        <p id="confirmMessageText"></p>
+                        <div class="modal-buttons">
+                            <button id="confirmYesButton" class="modal-button modal-button-yes">نعم</button>
+                            <button id="confirmNoButton" class="modal-button modal-button-no">إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        };
+
+        window.showConfirmModal = function(message, callback) {
+            let modal = document.getElementById('customConfirmModal');
+            if (!modal) {
+                window.createConfirmModal();
+                modal = document.getElementById('customConfirmModal');
+            }
+            document.getElementById('confirmMessageText').textContent = message;
+            confirmCallback = callback; // Set the callback
+
+            document.getElementById('confirmYesButton').onclick = () => {
+                if (confirmCallback) {
+                    confirmCallback(); // Execute callback on 'Yes'
+                }
+                window.hideConfirmModal();
+            };
+            document.getElementById('confirmNoButton').onclick = window.hideConfirmModal; // Just hide on 'No'
+
+            modal.style.display = 'flex';
+        };
+
+        window.hideConfirmModal = function() {
+            const modal = document.getElementById('customConfirmModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            confirmCallback = null; // Clear the callback
+        };
+
+        // --- Functions for Capital Management ---
+        // Updates the current capital and refreshes the display.
+        async function updateCapital(newCapital) {
+            window.currentCapital = newCapital;
+            updateCapitalDisplay();
+            if (isAuthReady && userId) {
+                try {
+                    await setDoc(doc(db, `artifacts/${appId}/users/${userId}/appState/capital`), { value: newCapital });
+                } catch (e) {
+                    console.error("Error updating capital in Firestore: ", e);
+                }
+            }
+        }
+
+        // Updates the displayed capital amount in the UI.
+        function updateCapitalDisplay() {
+            currentCapitalDisplay.textContent = window.formatDinar(window.currentCapital);
+        }
+
+        // --- Functions for Navigation ---
+        // Shows a specific section of the application and updates navigation button styles.
+        function showSection(sectionId) {
+            // Hide all sections
+            cardManagementSection.style.display = 'none';
+            cardReservationHistorySection.style.display = 'none';
+            libyanDinarDepositSection.style.display = 'none';
+            transactionFormSection.style.display = 'none';
+            transactionsLogSection.style.display = 'none';
+            expenseLogSection.style.display = 'none';
+
+            // Remove active class from all nav buttons
+            navCardsButton.classList.remove('active');
+            navCardReservationHistoryButton.classList.remove('active');
+            navLibyanDinarDepositButton.classList.remove('active');
+            navTransactionFormButton.classList.remove('active');
+            navTransactionsLogButton.classList.remove('active');
+            navExpensesButton.classList.remove('active');
+            navModifyCapitalButton.classList.remove('active'); // New
+
+            // Show the selected section and set active button
+            if (sectionId === 'cardManagementSection') {
+                cardManagementSection.style.display = 'block';
+                navCardsButton.classList.add('active');
+                renderCards(); // Re-render on navigation
+            } else if (sectionId === 'cardReservationHistorySection') {
+                cardReservationHistorySection.style.display = 'block';
+                navCardReservationHistoryButton.classList.add('active');
+                populateCardSelectionForCardReservationHistory();
+                updateSelectedCardReservationDetails();
+                renderCardReservationHistory(); // Re-render on navigation
+                updateCardReservationHistorySummaries(); // Re-calculate summaries
+            } else if (sectionId === 'libyanDinarDepositSection') {
+                libyanDinarDepositSection.style.display = 'block';
+                navLibyanDinarDepositButton.classList.add('active');
+                populateCardSelectionForLibyanDinarDeposit();
+                updateSelectedLibyanDinarDepositCardDetails();
+                renderLibyanDinarDeposits(); // Re-render on navigation
+                updateLibyanDinarDepositSummaries(); // Re-calculate summaries
+            } else if (sectionId === 'transactionFormSection') {
+                transactionFormSection.style.display = 'block';
+                navTransactionFormButton.classList.add('active');
+                populateCardSelection(); // Re-populate on navigation
+                updateSelectedCardDetails(); // Clear/update details
+            } else if (sectionId === 'transactionsLogSection') {
+                transactionsLogSection.style.display = 'block';
+                navTransactionsLogButton.classList.add('active');
+                renderTransactions(); // Re-render on navigation
+                updateTotalProfitDisplay(); // Re-calculate summaries
+            } else if (sectionId === 'expenseLogSection') {
+                expenseLogSection.style.display = 'block';
+                navExpensesButton.classList.add('active');
+                renderExpenses(); // Re-render on navigation
+                updateExpenseSummaries(); // Re-calculate summaries
+            }
+        }
+
+
+        // --- Functions for Card Management ---
+        // Handles adding a new card to Firestore.
+        async function addCard(event) {
+            event.preventDefault();
+
+            const cardHolderName = regCardHolderNameInput.value.trim();
+            const bankName = regBankNameInput.value.trim();
+            const nationalId = regNationalIdInput.value.trim();
+            const accountNumber = regAccountNumberInput.value.trim();
+            const phoneNumber = regPhoneNumberInput.value.trim();
+            const contactPhoneNumber = regContactPhoneNumberInput.value.trim(); 
+            const purchasePrice = parseFloat(regPurchasePriceInput.value); 
+
+            if (!cardHolderName || !bankName || !nationalId || !accountNumber || !phoneNumber || isNaN(purchasePrice) || purchasePrice < 0) {
+                window.displayMessage('الرجاء تعبئة جميع حقول تسجيل البطاقة الأساسية بشكل صحيح (بما في ذلك سعر الشراء الموجب).', 'error');
+                return;
+            }
+
+            // Check for duplicate National ID or Account Number
+            if (window.cards.some(card => card.nationalId === nationalId)) {
+                window.displayMessage('بطاقة بنفس الرقم الوطني موجودة بالفعل.', 'error');
+                return;
+            }
+            if (window.cards.some(card => card.accountNumber === accountNumber)) {
+                window.displayMessage('بطاقة بنفس رقم الحساب موجودة بالفعل.', 'error');
+                return;
+            }
+
+            try {
+                const newCardData = {
+                    cardHolderName,
+                    bankName,
+                    nationalId,
+                    accountNumber,
+                    phoneNumber,
+                    contactPhoneNumber, 
+                    purchasePrice: purchasePrice, 
+                    registrationDate: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                    timestamp: Date.now()
+                };
+                const docRef = await addDoc(collection(db, `artifacts/${appId}/users/${userId}/cards`), newCardData);
+                newCardData.id = docRef.id; // Add Firestore ID to local object
+                window.cards.push(newCardData); // Add card to local array
+                updateCapital(window.currentCapital - purchasePrice); // Deduct purchase price from capital
+                cardRegistrationForm.reset(); 
+                window.displayMessage('تم تسجيل البطاقة بنجاح.', 'success');
+                // renderCards() and populateCardSelection() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error adding card: ", e);
+                window.displayMessage('حدث خطأ أثناء تسجيل البطاقة.', 'error');
+            }
+        }
+
+        // Renders the list of registered cards in the table.
+        function renderCards() {
+            registeredCardsTableBody.innerHTML = '';
+            // Sort cards by timestamp descending for display
+            const sortedCards = [...window.cards].sort((a, b) => b.timestamp - a.timestamp);
+
+            if (sortedCards.length === 0) {
+                const row = registeredCardsTableBody.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 4; 
+                cell.textContent = 'لا توجد بطاقات مسجلة بعد. ابدأ بإضافة بطاقة جديدة.';
+                cell.style.textAlign = 'center';
+                return;
+            }
+
+            sortedCards.forEach((card, index) => {
+                const row = registeredCardsTableBody.insertRow();
+                
+                const numCell = row.insertCell(0);
+                numCell.setAttribute('data-label', 'الرقم');
+                numCell.textContent = `رقم (${sortedCards.length - index})`;
+
+                const cardInfoCell = row.insertCell(1);
+                cardInfoCell.setAttribute('data-label', 'اسم صاحب البطاقة والمصرف');
+                cardInfoCell.className = 'card-display-cell clickable-row'; 
+                cardInfoCell.onclick = (e) => {
+                    if (!e.target.closest('.delete-btn')) { 
+                        showCardDetails(card);
+                    }
+                };
+                cardInfoCell.innerHTML = `اسم صاحب البطاقة: ${card.cardHolderName} <br> اسم المصرف: ${card.bankName}`;
+
+                const cardPurchasePriceCell = row.insertCell(2);
+                cardPurchasePriceCell.setAttribute('data-label', 'سعر الشراء');
+                cardPurchasePriceCell.textContent = window.formatDinar(card.purchasePrice);
+
+
+                const actionsCell = row.insertCell(3); 
+                actionsCell.setAttribute('data-label', 'إجراءات');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'حذف';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation(); 
+                    window.showConfirmModal(
+                        `هل أنت متأكد أنك تريد حذف البطاقة الخاصة بـ "${card.cardHolderName}"؟ ملاحظة: لن يؤثر هذا على المعاملات السابقة المرتبطة بهذه البطاقة.`,
+                        () => deleteCardConfirmed(card.id)
+                    );
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        // Confirms and deletes a card from Firestore.
+        async function deleteCardConfirmed(id) {
+            try {
+                const cardToDelete = window.cards.find(card => card.id === id);
+                if (!cardToDelete) return;
+
+                // Refund purchase price to capital
+                await updateCapital(window.currentCapital + cardToDelete.purchasePrice);
+
+                // Delete associated Libyan Dinar deposits
+                const depositsToDelete = window.libyanDinarDeposits.filter(dep => dep.cardId === id);
+                for (const dep of depositsToDelete) {
+                    await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`, dep.id));
+                    await updateCapital(window.currentCapital + dep.amount); // Refund to capital
+                }
+
+                // Delete associated card reservation history entries
+                const reservationsToDelete = window.cardReservationHistory.filter(reservation => reservation.cardId === id);
+                for (const res of reservationsToDelete) {
+                    await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/cardReservationHistory`, res.id));
+                }
+
+                await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/cards`, id));
+                window.hideConfirmModal();
+                window.displayMessage('تم حذف البطاقة بنجاح.', 'success');
+                // renderCards(), populateCardSelection(), etc. will be called by onSnapshot listeners
+            } catch (e) {
+                console.error("Error deleting card: ", e);
+                window.displayMessage('حدث خطأ أثناء حذف البطاقة.', 'error');
+            }
+        }
+
+        // Clears the card registration form fields.
+        function clearCardForm() {
+            cardRegistrationForm.reset();
+        }
+
+        // --- Functions for Transaction Management ---
+        // Populates the card selection dropdown in the transaction form.
+        function populateCardSelection() {
+            cardSelectionInput.innerHTML = '<option value="">اختر بطاقة مسجلة</option>';
+            window.cards.forEach(card => {
+                const option = document.createElement('option');
+                option.value = card.id;
+                option.textContent = `${card.cardHolderName} (${card.bankName})`;
+                cardSelectionInput.appendChild(option);
+            });
+        }
+
+        // Updates the displayed details of the selected card in the transaction form.
+        function updateSelectedCardDetails() {
+            const selectedId = cardSelectionInput.value;
+            const selectedDiv = document.getElementById('selectedCardDetails');
+            if (selectedId) {
+                const selectedCard = window.cards.find(card => card.id == selectedId);
+                if (selectedCard) {
+                    displayCardHolderName.textContent = selectedCard.cardHolderName;
+                    displayBankName.textContent = selectedCard.bankName;
+                    displayNationalId.textContent = selectedCard.nationalId;
+                    displayAccountNumber.textContent = selectedCard.accountNumber;
+                    displayPhoneNumber.textContent = selectedCard.phoneNumber;
+                    displayContactPhoneNumber.textContent = selectedCard.contactPhoneNumber || 'غير متوفر';
+                    displayCardPurchasePrice.textContent = window.formatDinar(selectedCard.purchasePrice); 
+                    selectedDiv.style.display = 'block';
+                }
+            } else {
+                selectedDiv.style.display = 'none';
+                displayCardHolderName.textContent = '';
+                displayBankName.textContent = '';
+                displayNationalId.textContent = '';
+                displayAccountNumber.textContent = '';
+                displayPhoneNumber.textContent = '';
+                displayContactPhoneNumber.textContent = ''; 
+                displayCardPurchasePrice.textContent = '';
+            }
+        }
+
+        // Handles adding a new transaction to Firestore.
+        async function addTransaction(event) {
+            event.preventDefault();
+
+            const transactionType = transactionTypeInput.value;
+            const cardId = cardSelectionInput.value;
+            const selectedTransactionCard = window.cards.find(card => card.id == cardId);
+
+            if (!selectedTransactionCard) {
+                window.displayMessage('الرجاء اختيار بطاقة مسجلة للمعاملة.', 'error');
+                return;
+            }
+
+            const purchasePrice = selectedTransactionCard.purchasePrice; 
+            const usdAmount = parseFloat(usdAmountInput.value);
+            const discountRate = parseFloat(discountRateInput.value);
+            const usdSalePrice = parseFloat(usdSalePriceInput.value);
+            const paymentMethod = paymentMethodInput.value;
+
+            if (!transactionType || isNaN(usdAmount) || usdAmount <= 0 || isNaN(discountRate) || discountRate < 0 || isNaN(usdSalePrice) || usdSalePrice <= 0 || !paymentMethod) {
+                window.displayMessage('الرجاء تعبئة جميع حقول المعاملة المطلوبة بشكل صحيح (القيم يجب أن تكون أرقام موجبة).', 'error');
+                return;
+            }
+
+            // --- Calculations ---
+            const netUsd = usdAmount * (1 - discountRate / 100);
+            const calculatedSalePrice = netUsd * usdSalePrice;
+            
+            const totalPaid = purchasePrice; 
+            
+            let totalLibyanDinarDepositsForSoldCard = 0;
+            let clearedLibyanDinarDepositIds = []; 
+
+            if (transactionType === 'بيع') {
+                // Find all Libyan Dinar deposits associated with this card that are not yet cleared by a 'بيع' transaction
+                const q = query(collection(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`), where("cardId", "==", cardId));
+                const querySnapshot = await getDocs(q);
+                
+                querySnapshot.forEach(doc => {
+                    const dep = doc.data();
+                    totalLibyanDinarDepositsForSoldCard += dep.amount;
+                    clearedLibyanDinarDepositIds.push(doc.id);
+                });
+            }
+
+            const profit = calculatedSalePrice - purchasePrice - totalLibyanDinarDepositsForSoldCard;
+
+            try {
+                const newTransactionData = {
+                    date: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                    type: transactionType,
+                    cardId: selectedTransactionCard.id,
+                    cardHolderName: selectedTransactionCard.cardHolderName,
+                    bankName: selectedTransactionCard.bankName,
+                    nationalId: selectedTransactionCard.nationalId,
+                    accountNumber: selectedTransactionCard.accountNumber,
+                    phoneNumber: selectedTransactionCard.phoneNumber,
+                    contactPhoneNumber: selectedTransactionCard.contactPhoneNumber, 
+                    purchasePrice: purchasePrice, 
+                    usdAmount: usdAmount,
+                    discountRate: discountRate,
+                    netUsd: netUsd,
+                    usdSalePrice: usdSalePrice,
+                    calculatedSalePrice: calculatedSalePrice,
+                    totalPaid: totalPaid,
+                    profit: profit,
+                    paymentMethod: paymentMethod,
+                    totalLibyanDinarDepositsInvolved: totalLibyanDinarDepositsForSoldCard,
+                    clearedLibyanDinarDepositIds: clearedLibyanDinarDepositIds, 
+                    timestamp: Date.now()
+                };
+                await addDoc(collection(db, `artifacts/${appId}/users/${userId}/transactions`), newTransactionData);
+
+                if (transactionType === 'بيع') {
+                    await updateCapital(window.currentCapital + calculatedSalePrice);
+                    // Remove cleared deposits from Firestore
+                    for (const depId of clearedLibyanDinarDepositIds) {
+                        await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`, depId));
+                    }
+                }
+                transactionForm.reset();
+                usdAmountInput.value = 2000; // Reset to default
+                discountRateInput.value = 4.8; // Reset to default
+                usdSalePriceInput.value = ''; // Clear sale price
+                updateSelectedCardDetails(); // Clear selected card details display
+                window.displayMessage('تم إضافة المعاملة بنجاح.', 'success');
+                // renderTransactions(), renderLibyanDinarDeposits(), etc. will be called by onSnapshot listeners
+            } catch (e) {
+                console.error("Error adding transaction: ", e);
+                window.displayMessage('حدث خطأ أثناء إضافة المعاملة.', 'error');
+            }
+        }
+
+        // Renders the list of transactions in the table.
+        function renderTransactions() {
+            transactionsTableBody.innerHTML = '';
+            // Sort transactions by timestamp descending for display
+            const sortedTransactions = [...window.transactions].sort((a, b) => b.timestamp - a.timestamp);
+
+            if (sortedTransactions.length === 0) {
+                const row = transactionsTableBody.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 6;
+                cell.textContent = 'لا توجد معاملات مسجلة بعد.';
+                cell.style.textAlign = 'center';
+                return;
+            }
+
+            sortedTransactions.forEach((trans, index) => {
+                const row = transactionsTableBody.insertRow();
+                row.className = 'clickable-row';
+                row.onclick = () => {
+                    showTransactionDetails(trans, sortedTransactions.length - index);
+                };
+
+                const numCell = row.insertCell(0);
+                numCell.setAttribute('data-label', 'الرقم');
+                numCell.textContent = sortedTransactions.length - index;
+
+                const dateCell = row.insertCell(1);
+                dateCell.setAttribute('data-label', 'التاريخ');
+                dateCell.textContent = trans.date;
+
+                const cardInfoCell = row.insertCell(2);
+                cardInfoCell.setAttribute('data-label', 'البطاقة (صاحب/مصرف)');
+                cardInfoCell.innerHTML = `${trans.cardHolderName} <br> (${trans.bankName})`;
+
+                const typeCell = row.insertCell(3);
+                typeCell.setAttribute('data-label', 'النوع');
+                typeCell.textContent = trans.type;
+
+                const profitCell = row.insertCell(4);
+                profitCell.setAttribute('data-label', 'المكسب (د.ل)');
+                profitCell.textContent = window.formatDinar(trans.profit);
+                profitCell.style.color = trans.profit < 0 ? '#dc3545' : '#28a745'; // Red for loss, green for profit
+
+                const actionsCell = row.insertCell(5);
+                actionsCell.setAttribute('data-label', 'إجراءات');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'حذف';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation(); 
+                    window.showConfirmModal(
+                        'هل أنت متأكد أنك تريد حذف هذه المعاملة؟',
+                        () => deleteTransactionConfirmed(trans.id)
+                    );
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        // Updates the total profit display.
+        function updateTotalProfitDisplay() {
+            let totalProfit = 0;
+            window.transactions.forEach(trans => {
+                totalProfit += trans.profit;
+            });
+            totalTransactionsProfitDisplay.textContent = window.formatDinar(totalProfit);
+        }
+
+        // Confirms and deletes a transaction from Firestore.
+        async function deleteTransactionConfirmed(id) {
+            try {
+                const transToDelete = window.transactions.find(trans => trans.id === id);
+                if (!transToDelete) return;
+
+                if (transToDelete.type === 'شراء') {
+                    await updateCapital(window.currentCapital + transToDelete.purchasePrice);
+                } else if (transToDelete.type === 'بيع') {
+                    await updateCapital(window.currentCapital - transToDelete.calculatedSalePrice);
+
+                    // Re-add cleared Libyan Dinar deposits back to Firestore.
+                    if (transToDelete.clearedLibyanDinarDepositIds && transToDelete.clearedLibyanDinarDepositIds.length > 0) {
+                        for (const depId of transToDelete.clearedLibyanDinarDepositIds) {
+                            const originalDepositData = {
+                                date: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                                type: 'إيداع بالدينار الليبي',
+                                amount: transToDelete.totalLibyanDinarDepositsInvolved / transToDelete.clearedLibyanDinarDepositIds.length, // Simplified re-addition
+                                note: `تمت استعادتها من معاملة محذوفة: ${transToDelete.id}`,
+                                cardId: transToDelete.cardId,
+                                timestamp: Date.now()
+                            };
+                            await addDoc(collection(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`), originalDepositData);
+                            await updateCapital(window.currentCapital - originalDepositData.amount); // Deduct again as it's a "new" deposit
+                        }
+                    }
+                }
+
+                await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/transactions`, id));
+                window.hideConfirmModal();
+                window.displayMessage('تم حذف المعاملة بنجاح.', 'success');
+                // renderTransactions(), renderLibyanDinarDeposits(), etc. will be called by onSnapshot listeners
+            } catch (e) {
+                console.error("Error deleting transaction: ", e);
+                window.displayMessage('حدث خطأ أثناء حذف المعاملة.', 'error');
+            }
+        }
+
+        // --- Functions for Expense/Income Management ---
+        // Handles adding a new expense or income entry to Firestore.
+        async function addExpense(event) {
+            event.preventDefault();
+
+            const expenseType = expenseTypeInput.value;
+            const expenseAmount = parseFloat(expenseAmountInput.value);
+            const expenseNote = expenseNoteInput.value.trim();
+
+            if (!expenseType || isNaN(expenseAmount) || expenseAmount <= 0) {
+                window.displayMessage('الرجاء تعبئة نوع الحركة والمبلغ بشكل صحيح (يجب أن يكون المبلغ أكبر من صفر).', 'error');
+                return;
+            }
+
+            try {
+                const newExpenseData = {
+                    date: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                    type: expenseType,
+                    amount: expenseAmount,
+                    note: expenseNote,
+                    timestamp: Date.now()
+                };
+                await addDoc(collection(db, `artifacts/${appId}/users/${userId}/expenses`), newExpenseData);
+
+                if (expenseType === 'إيراد') {
+                    await updateCapital(window.currentCapital + expenseAmount);
+                } else if (expenseType === 'مصروف') {
+                    await updateCapital(window.currentCapital - expenseAmount);
+                }
+                expenseForm.reset();
+                window.displayMessage('تم إضافة الحركة بنجاح.', 'success');
+                // renderExpenses() and updateExpenseSummaries() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error adding expense: ", e);
+                window.displayMessage('حدث خطأ أثناء إضافة الحركة.', 'error');
+            }
+        }
+
+        // Renders the list of expenses/incomes in the table.
+        function renderExpenses() {
+            expenseTableBody.innerHTML = '';
+            // Sort expenses by timestamp descending for display
+            const sortedExpenses = [...window.expenses].sort((a, b) => b.timestamp - a.timestamp);
+
+            if (sortedExpenses.length === 0) {
+                const row = expenseTableBody.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 6;
+                cell.textContent = 'لا توجد حركات مصروفات أو إيرادات مسجلة بعد.';
+                cell.style.textAlign = 'center';
+                return;
+            }
+
+            const MAX_NOTE_LENGTH = 30; // Max length for note in table
+
+            sortedExpenses.forEach((expense, index) => {
+                const row = expenseTableBody.insertRow();
+                row.className = 'clickable-row';
+                row.onclick = () => showExpenseDetails(expense, sortedExpenses.length - index);
+
+                const numCell = row.insertCell(0);
+                numCell.setAttribute('data-label', 'الرقم');
+                numCell.textContent = sortedExpenses.length - index;
+
+                const dateCell = row.insertCell(1);
+                dateCell.setAttribute('data-label', 'التاريخ');
+                dateCell.textContent = expense.date;
+
+                const typeCell = row.insertCell(2);
+                typeCell.setAttribute('data-label', 'النوع');
+                typeCell.textContent = expense.type;
+
+                const amountCell = row.insertCell(3);
+                amountCell.setAttribute('data-label', 'المبلغ (د.ل)');
+                amountCell.textContent = window.formatDinar(expense.amount);
+                amountCell.style.color = (expense.type === 'مصروف') ? '#dc3545' : '#28a745'; 
+
+                const noteCell = row.insertCell(4);
+                noteCell.setAttribute('data-label', 'الملاحظة');
+                let displayNote = expense.note || 'لا توجد';
+                if (displayNote.length > MAX_NOTE_LENGTH) {
+                    displayNote = displayNote.substring(0, MAX_NOTE_LENGTH) + '...';
+                }
+                noteCell.textContent = displayNote;
+
+                const actionsCell = row.insertCell(5);
+                actionsCell.setAttribute('data-label', 'إجراءات');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'حذف';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation();
+                    window.showConfirmModal(
+                        `هل أنت متأكد أنك تريد حذف حركة ${expense.type} بمبلغ ${window.formatDinar(expense.amount)}؟`,
+                        () => deleteExpenseConfirmed(expense.id, expense.type, expense.amount)
+                    );
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        // Updates the total income and total expenses summaries.
+        function updateExpenseSummaries() {
+            let totalIncome = 0;
+            let totalExpenses = 0;
+            window.expenses.forEach(expense => {
+                if (expense.type === 'إيراد') {
+                    totalIncome += expense.amount;
+                } else if (expense.type === 'مصروف') {
+                    totalExpenses += expense.amount;
+                }
+            });
+            totalIncomeDisplay.textContent = window.formatDinar(totalIncome);
+            totalExpensesDisplay.textContent = window.formatDinar(totalExpenses);
+        }
+
+        // Confirms and deletes an expense/income entry from Firestore.
+        async function deleteExpenseConfirmed(id, type, amount) {
+            try {
+                if (type === 'إيراد') {
+                    await updateCapital(window.currentCapital - amount);
+                } else if (type === 'مصروف') {
+                    await updateCapital(window.currentCapital + amount);
+                }
+                await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/expenses`, id));
+                window.hideConfirmModal();
+                window.displayMessage('تم حذف الحركة بنجاح.', 'success');
+                // renderExpenses() and updateExpenseSummaries() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error deleting expense: ", e);
+                window.displayMessage('حدث خطأ أثناء حذف الحركة.', 'error');
+            }
+        }
+
+        // Clears the expense/income form fields.
+        function clearExpenseForm() {
+            expenseForm.reset();
+        }
+
+        // --- Functions for Libyan Dinar Deposit Management ---
+        // Populates the card selection dropdown in the Libyan Dinar deposit form.
+        function populateCardSelectionForLibyanDinarDeposit() {
+            libyanDinarDepositCardSelection.innerHTML = '<option value="">اختر بطاقة مسجلة</option>';
+            window.cards.forEach(card => {
+                const option = document.createElement('option');
+                option.value = card.id;
+                option.textContent = `${card.cardHolderName} (${card.bankName})`;
+                libyanDinarDepositCardSelection.appendChild(option);
+            });
+        }
+
+        // Updates the displayed details of the selected card in the Libyan Dinar deposit form.
+        function updateSelectedLibyanDinarDepositCardDetails() {
+            const selectedId = libyanDinarDepositCardSelection.value;
+            if (selectedId) {
+                const selectedCard = window.cards.find(card => card.id == selectedId);
+                if (selectedCard) {
+                    displayLibyanDinarDepositCardHolderName.textContent = selectedCard.cardHolderName;
+                    displayLibyanDinarDepositBankName.textContent = selectedCard.bankName;
+                    selectedLibyanDinarDepositCardDetails.style.display = 'block';
+                }
+            } else {
+                selectedLibyanDinarDepositCardDetails.style.display = 'none';
+                displayLibyanDinarDepositCardHolderName.textContent = '';
+                displayLibyanDinarDepositBankName.textContent = '';
+            }
+        }
+
+        // Handles adding a new Libyan Dinar deposit to Firestore.
+        async function addLibyanDinarDeposit(event) {
+            event.preventDefault();
+
+            const cardId = libyanDinarDepositCardSelection.value;
+            const selectedLibyanDinarDepositCard = window.cards.find(card => card.id == cardId);
+            const libyanDinarDepositAmount = parseFloat(libyanDinarDepositAmountInput.value);
+            const libyanDinarDepositNote = libyanDinarDepositNoteInput.value.trim();
+
+            if (!selectedLibyanDinarDepositCard || isNaN(libyanDinarDepositAmount) || libyanDinarDepositAmount <= 0) {
+                window.displayMessage('الرجاء اختيار بطاقة وإدخال مبلغ إيداع بالدينار الليبي صحيح (يجب أن يكون المبلغ أكبر من صفر).', 'error');
+                return;
+            }
+
+            try {
+                const newLibyanDinarDepositData = {
+                    date: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                    type: 'إيداع بالدينار الليبي',
+                    amount: libyanDinarDepositAmount,
+                    note: `إيداع بالدينار الليبي لـ ${selectedLibyanDinarDepositCard.cardHolderName} (${selectedLibyanDinarDepositCard.bankName}): ${libyanDinarDepositNote}`.trim(),
+                    cardId: selectedLibyanDinarDepositCard.id,
+                    timestamp: Date.now()
+                };
+                await addDoc(collection(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`), newLibyanDinarDepositData);
+                await updateCapital(window.currentCapital - libyanDinarDepositAmount); // Deduct deposit amount from capital
+                libyanDinarDepositForm.reset();
+                updateSelectedLibyanDinarDepositCardDetails();
+                window.displayMessage('تم إضافة الإيداع بالدينار الليبي بنجاح.', 'success');
+                // renderLibyanDinarDeposits() and updateLibyanDinarDepositSummaries() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error adding Libyan Dinar deposit: ", e);
+                window.displayMessage('حدث خطأ أثناء إضافة الإيداع بالدينار الليبي.', 'error');
+            }
+        }
+
+        // Renders the list of Libyan Dinar deposits in the table.
+        function renderLibyanDinarDeposits() {
+            libyanDinarDepositTableBody.innerHTML = '';
+            // Sort deposits by timestamp descending for display
+            const sortedDeposits = [...window.libyanDinarDeposits].sort((a, b) => b.timestamp - a.timestamp);
+
+            if (sortedDeposits.length === 0) {
+                const row = libyanDinarDepositTableBody.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 6;
+                cell.textContent = 'لا توجد إيداعات بالدينار الليبي مسجلة بعد.';
+                cell.style.textAlign = 'center';
+                return;
+            }
+
+            const MAX_NOTE_LENGTH = 30; // Max length for note in table
+
+            sortedDeposits.forEach((deposit, index) => {
+                const row = libyanDinarDepositTableBody.insertRow();
+                row.className = 'clickable-row';
+                row.onclick = () => showLibyanDinarDepositDetails(deposit, sortedDeposits.length - index);
+
+                const numCell = row.insertCell(0);
+                numCell.setAttribute('data-label', 'الرقم');
+                numCell.textContent = sortedDeposits.length - index;
+
+                const dateCell = row.insertCell(1);
+                dateCell.setAttribute('data-label', 'التاريخ');
+                dateCell.textContent = deposit.date;
+
+                const associatedCard = window.cards.find(card => card.id === deposit.cardId);
+                const cardInfoCell = row.insertCell(2);
+                cardInfoCell.setAttribute('data-label', 'البطاقة (صاحب/مصرف)');
+                cardInfoCell.innerHTML = associatedCard ? `${associatedCard.cardHolderName} <br> (${associatedCard.bankName})` : 'بطاقة محذوفة';
+
+                const amountCell = row.insertCell(3);
+                amountCell.setAttribute('data-label', 'المبلغ (د.ل)');
+                amountCell.textContent = window.formatDinar(deposit.amount);
+                amountCell.style.color = '#dc3545'; // Deposits are typically a deduction from available capital
+
+                const noteCell = row.insertCell(4);
+                noteCell.setAttribute('data-label', 'الملاحظة');
+                let displayNote = deposit.note || 'لا توجد';
+                if (displayNote.length > MAX_NOTE_LENGTH) {
+                    displayNote = displayNote.substring(0, MAX_NOTE_LENGTH) + '...';
+                }
+                noteCell.textContent = displayNote;
+
+                const actionsCell = row.insertCell(5);
+                actionsCell.setAttribute('data-label', 'إجراءات');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'حذف';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation();
+                    window.showConfirmModal(
+                        `هل أنت متأكد أنك تريد حذف إيداع بالدينار الليبي بمبلغ ${window.formatDinar(deposit.amount)}؟`,
+                        () => deleteLibyanDinarDepositConfirmed(deposit.id, deposit.amount)
+                    );
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        // Updates the total Libyan Dinar deposits summary.
+        function updateLibyanDinarDepositSummaries() {
+            let totalDeposits = 0;
+            window.libyanDinarDeposits.forEach(deposit => {
+                totalDeposits += deposit.amount;
+            });
+            totalLibyanDinarDepositsDisplay.textContent = window.formatDinar(totalDeposits);
+        }
+
+        // Confirms and deletes a Libyan Dinar deposit from Firestore.
+        async function deleteLibyanDinarDepositConfirmed(id, amount) {
+            try {
+                await updateCapital(window.currentCapital + amount); // Add deposit amount back to capital
+                await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`, id));
+                window.hideConfirmModal();
+                window.displayMessage('تم حذف الإيداع بالدينار الليبي بنجاح.', 'success');
+                // renderLibyanDinarDeposits() and updateLibyanDinarDepositSummaries() will be called by onSnapshot listener
+            }
+            catch (e) {
+                console.error("Error deleting Libyan Dinar deposit: ", e);
+                window.displayMessage('حدث خطأ أثناء حذف الإيداع بالدينار الليبي.', 'error');
+            }
+        }
+
+        // Clears the Libyan Dinar deposit form fields.
+        function clearLibyanDinarDepositForm() {
+            libyanDinarDepositForm.reset();
+            updateSelectedLibyanDinarDepositCardDetails();
+        }
+
+        // --- Functions for Card Reservation History ---
+        // Populates the card selection dropdown in the card reservation form.
+        function populateCardSelectionForCardReservationHistory() {
+            cardReservationCardSelection.innerHTML = '<option value="">اختر بطاقة مسجلة</option>';
+            window.cards.forEach(card => {
+                const option = document.createElement('option');
+                option.value = card.id;
+                option.textContent = `${card.cardHolderName} (${card.bankName})`;
+                cardReservationCardSelection.appendChild(option);
+            });
+        }
+
+        // Updates the displayed details of the selected card in the card reservation form.
+        function updateSelectedCardReservationDetails() {
+            const selectedId = cardReservationCardSelection.value;
+            if (selectedId) {
+                const selectedCard = window.cards.find(card => card.id == selectedId);
+                if (selectedCard) {
+                    displayCardReservationCardHolderName.textContent = selectedCard.cardHolderName;
+                    displayCardReservationBankName.textContent = selectedCard.bankName;
+                    displayCardReservationNationalId.textContent = selectedCard.nationalId;
+                    displayCardReservationAccountNumber.textContent = selectedCard.accountNumber;
+                    displayCardReservationPhoneNumber.textContent = selectedCard.phoneNumber;
+                    displayCardReservationContactPhoneNumber.textContent = selectedCard.contactPhoneNumber || 'غير متوفر';
+                    displayCardReservationPurchasePrice.textContent = window.formatDinar(selectedCard.purchasePrice);
+                    selectedCardReservationDetails.style.display = 'block';
+                }
+            } else {
+                selectedCardReservationDetails.style.display = 'none';
+                displayCardReservationCardHolderName.textContent = '';
+                displayCardReservationBankName.textContent = '';
+                displayCardReservationNationalId.textContent = '';
+                displayCardReservationAccountNumber.textContent = '';
+                displayCardReservationPhoneNumber.textContent = '';
+                displayCardReservationContactPhoneNumber.textContent = '';
+                displayCardReservationPurchasePrice.textContent = '';
+            }
+        }
+
+        // Handles adding a new card reservation entry to Firestore.
+        async function addCardReservation(event) {
+            event.preventDefault();
+
+            const cardId = cardReservationCardSelection.value;
+            const selectedReservationCard = window.cards.find(card => card.id == cardId);
+            const reservationDate = reservationDateInput.value;
+            const reservationNote = reservationNoteInput.value.trim();
+
+            if (!selectedReservationCard || !reservationDate) {
+                window.displayMessage('الرجاء اختيار بطاقة وتحديد تاريخ الحجز.', 'error');
+                return;
+            }
+
+            try {
+                const newReservationData = {
+                    entryDate: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                    cardId: selectedReservationCard.id,
+                    cardHolderName: selectedReservationCard.cardHolderName,
+                    bankName: selectedReservationCard.bankName,
+                    nationalId: selectedReservationCard.nationalId,
+                    accountNumber: selectedReservationCard.accountNumber,
+                    phoneNumber: selectedReservationCard.phoneNumber,
+                    contactPhoneNumber: selectedReservationCard.contactPhoneNumber,
+                    purchasePrice: selectedReservationCard.purchasePrice,
+                    reservationDate: reservationDate,
+                    note: reservationNote,
+                    timestamp: Date.now()
+                };
+                await addDoc(collection(db, `artifacts/${appId}/users/${userId}/cardReservationHistory`), newReservationData);
+                cardReservationForm.reset();
+                updateSelectedCardReservationDetails();
+                window.displayMessage('تم إضافة سجل الحجز بنجاح.', 'success');
+                // renderCardReservationHistory() and updateCardReservationHistorySummaries() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error adding card reservation: ", e);
+                window.displayMessage('حدث خطأ أثناء إضافة سجل الحجز.', 'error');
+            }
+        }
+
+        // Renders the list of card reservation entries in the table.
+        function renderCardReservationHistory() {
+            cardReservationHistoryTableBody.innerHTML = '';
+            // Sort reservations by timestamp descending for display
+            const sortedReservations = [...window.cardReservationHistory].sort((a, b) => b.timestamp - a.timestamp);
+
+            if (sortedReservations.length === 0) {
+                const row = cardReservationHistoryTableBody.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 6;
+                cell.textContent = 'لا توجد سجلات حجز بطاقات بعد.';
+                cell.style.textAlign = 'center';
+                return;
+            }
+
+            const MAX_NOTE_LENGTH = 30; // Max length for note in table
+
+            sortedReservations.forEach((reservation, index) => {
+                const row = cardReservationHistoryTableBody.insertRow();
+                row.className = 'clickable-row';
+                row.onclick = () => showCardReservationDetails(reservation, sortedReservations.length - index);
+
+                const numCell = row.insertCell(0);
+                numCell.setAttribute('data-label', 'الرقم');
+                numCell.textContent = sortedReservations.length - index;
+
+                const entryDateCell = row.insertCell(1);
+                entryDateCell.setAttribute('data-label', 'التاريخ');
+                entryDateCell.textContent = reservation.entryDate;
+
+                const cardInfoCell = row.insertCell(2);
+                cardInfoCell.setAttribute('data-label', 'البطاقة (صاحب/مصرف)');
+                cardInfoCell.innerHTML = `${reservation.cardHolderName} <br> (${reservation.bankName})`;
+
+                const reservationDateCell = row.insertCell(3);
+                reservationDateCell.setAttribute('data-label', 'تاريخ الحجز');
+                reservationDateCell.textContent = reservation.reservationDate;
+
+                const noteCell = row.insertCell(4);
+                noteCell.setAttribute('data-label', 'الملاحظة');
+                let displayNote = reservation.note || 'لا توجد';
+                if (displayNote.length > MAX_NOTE_LENGTH) {
+                    displayNote = displayNote.substring(0, MAX_NOTE_LENGTH) + '...';
+                }
+                noteCell.textContent = displayNote;
+
+                const actionsCell = row.insertCell(5);
+                actionsCell.setAttribute('data-label', 'إجراءات');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'حذف';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation();
+                    window.showConfirmModal(
+                        `هل أنت متأكد أنك تريد حذف سجل حجز البطاقة لـ "${reservation.cardHolderName}" بتاريخ ${reservation.reservationDate}؟`,
+                        () => deleteCardReservationEntryConfirmed(reservation.id)
+                    );
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        // Updates the total number of card reservations summary.
+        function updateCardReservationHistorySummaries() {
+            totalCardReservationsDisplay.textContent = window.cardReservationHistory.length;
+        }
+
+        // Confirms and deletes a card reservation entry from Firestore.
+        async function deleteCardReservationEntryConfirmed(id) {
+            try {
+                await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/cardReservationHistory`, id));
+                window.hideConfirmModal();
+                window.displayMessage('تم حذف سجل الحجز بنجاح.', 'success');
+                // renderCardReservationHistory() and updateCardReservationHistorySummaries() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error deleting card reservation entry: ", e);
+                window.displayMessage('حدث خطأ أثناء حذف سجل الحجز.', 'error');
+            }
+        }
+
+        // Clears the card reservation form fields.
+        function clearCardReservationForm() {
+            cardReservationForm.reset();
+            updateSelectedCardReservationDetails();
+        }
+
+        // --- Card Details Modal Functions ---
+        // Displays a modal with detailed information about a selected card.
+        function showCardDetails(card) {
+            modalCardHolderName.textContent = card.cardHolderName;
+            modalBankName.textContent = card.bankName;
+            modalNationalId.textContent = card.nationalId;
+            modalAccountNumber.textContent = card.accountNumber;
+            modalPhoneNumber.textContent = card.phoneNumber;
+            modalContactPhoneNumber.textContent = card.contactPhoneNumber || 'غير متوفر'; 
+            modalCardPurchasePrice.textContent = window.formatDinar(card.purchasePrice); 
+            modalRegistrationDate.textContent = card.registrationDate; 
+
+            // Filter transactions related to this card
+            const cardTransactions = window.transactions.filter(trans => trans.cardId === card.id);
+            cardTransactionsList.innerHTML = ''; // Clear previous list
+
+            if (cardTransactions.length === 0) {
+                cardTransactionsList.innerHTML = '<p class="no-transactions">لا توجد معاملات مسجلة لهذه البطاقة.</p>';
+            } else {
+                cardTransactions.forEach(trans => {
+                    const transactionItem = document.createElement('div');
+                    transactionItem.className = 'transaction-item';
+                    transactionItem.innerHTML = `
+                        <div class="transaction-detail"><strong>التاريخ:</strong> <span>${trans.date}</span></div>
+                        <div class="transaction-detail"><strong>النوع:</strong> <span>${trans.type}</span></div>
+                        <div class="transaction-detail"><strong>المكسب (د.ل):</strong> <span>${window.formatDinar(trans.profit)}</span></div>
+                        <div class="transaction-detail"><strong>المدفوع (د.ل):</strong> <span>${window.formatDinar(trans.totalPaid)}</span></div>
+                        <div class="transaction-detail"><strong>المستلم (د.ل):</strong> <span>${window.formatDinar(trans.calculatedSalePrice)}</span></div>
+                        <div class="transaction-detail"><strong>طريقة الدفع:</strong> <span>${trans.paymentMethod}</span></div>
+                    `;
+                    cardTransactionsList.appendChild(transactionItem);
+                });
+            }
+
+            cardDetailsModal.style.display = 'flex'; // Show the modal
+        }
+
+        // Hides the card details modal.
+        function hideCardDetailsModal() {
+            cardDetailsModal.style.display = 'none';
+        }
+
+        // --- Transaction Details Modal Functions ---
+        // Displays a modal with detailed information about a selected transaction.
+        function showTransactionDetails(trans, displayNum) {
+            try {
+                modalTransactionTitle.textContent = `تفاصيل المعاملة رقم ${displayNum}`;
+                modalTransNumber.textContent = displayNum;
+                modalTransDate.textContent = trans.date;
+                modalTransType.textContent = trans.type;
+                modalTransCardHolderName.textContent = trans.cardHolderName;
+                modalTransBankName.textContent = trans.bankName;
+                modalTransNationalId.textContent = trans.nationalId;
+                modalTransAccountNumber.textContent = trans.accountNumber;
+                modalTransPhoneNumber.textContent = trans.phoneNumber;
+                modalTransContactPhoneNumber.textContent = trans.contactPhoneNumber || 'غير متوفر'; 
+                modalTransPurchasePrice.textContent = window.formatDinar(trans.purchasePrice);
+                modalTransUsdAmount.textContent = trans.usdAmount.toFixed(2); 
+                modalTransDiscountRate.textContent = trans.discountRate.toFixed(2);
+                modalTransNetUsd.textContent = trans.netUsd.toFixed(2); 
+                modalTransUsdSalePrice.textContent = trans.usdSalePrice.toFixed(2);
+                modalTransCalculatedSalePrice.textContent = window.formatDinar(trans.calculatedSalePrice);
+                modalTransTotalPaid.textContent = window.formatDinar(trans.totalPaid);
+                modalTransProfit.textContent = window.formatDinar(trans.profit);
+                modalTransPaymentMethod.textContent = trans.paymentMethod;
+                modalTransLibyanDinarDepositsInvolved.textContent = window.formatDinar(trans.totalLibyanDinarDepositsInvolved || 0);
+
+                transactionDetailsModal.style.display = 'flex'; // Show the modal
+            } catch (error) {
+                console.error("Error showing transaction details modal:", error);
+                window.displayMessage('حدث خطأ أثناء عرض تفاصيل المعاملة. يرجى التحقق من وحدة تحكم المطور.', 'error');
+            }
+        }
+
+        // Hides the transaction details modal.
+        function hideTransactionDetailsModal() {
+            transactionDetailsModal.style.display = 'none';
+        }
+
+        // --- Expense Details Modal Functions ---
+        // Displays a modal with detailed information about a selected expense/income entry.
+        function showExpenseDetails(expense, displayNum) {
+            modalExpenseTitle.textContent = `تفاصيل الحركة رقم ${displayNum}`;
+            modalExpenseNumber.textContent = displayNum;
+            modalExpenseDate.textContent = expense.date;
+            modalExpenseType.textContent = expense.type;
+            modalExpenseAmount.textContent = window.formatDinar(expense.amount);
+            modalExpenseNote.textContent = expense.note || 'لا توجد ملاحظة';
+
+            expenseDetailsModal.style.display = 'flex'; // Show the modal
+        }
+
+        // Hides the expense details modal.
+        function hideExpenseDetailsModal() {
+            expenseDetailsModal.style.display = 'none';
+        }
+
+        // --- Libyan Dinar Deposit Details Modal Functions ---
+        // Displays a modal with detailed information about a selected Libyan Dinar deposit.
+        function showLibyanDinarDepositDetails(deposit, displayNum) {
+            modalLibyanDinarDepositTitle.textContent = `تفاصيل الإيداع بالدينار الليبي رقم ${displayNum}`;
+            modalLibyanDinarDepositNumber.textContent = displayNum;
+            modalLibyanDinarDepositDate.textContent = deposit.date;
+            
+            const associatedCard = window.cards.find(card => card.id === deposit.cardId);
+            modalLibyanDinarDepositCardHolderName.textContent = associatedCard ? associatedCard.cardHolderName : 'بطاقة محذوفة';
+            modalLibyanDinarDepositBankName.textContent = associatedCard ? associatedCard.bankName : 'غير متوفر';
+            
+            modalLibyanDinarDepositAmount.textContent = window.formatDinar(deposit.amount);
+            modalLibyanDinarDepositNote.textContent = deposit.note || 'لا توجد ملاحظة';
+
+            libyanDinarDepositDetailsModal.style.display = 'flex'; // Show the modal
+        }
+
+        // Hides the Libyan Dinar deposit details modal.
+        function hideLibyanDinarDepositDetailsModal() {
+            libyanDinarDepositDetailsModal.style.display = 'none';
+        }
+
+        // --- Card Reservation Details Modal Functions ---
+        // Displays a modal with detailed information about a selected card reservation.
+        function showCardReservationDetails(reservation, displayNum) {
+            modalCardReservationTitle.textContent = `تفاصيل الحجز رقم ${displayNum}`;
+            modalCardReservationNumber.textContent = displayNum;
+            modalCardReservationEntryDate.textContent = reservation.entryDate;
+            modalCardReservationCardHolderName.textContent = reservation.cardHolderName;
+            modalCardReservationBankName.textContent = reservation.bankName;
+            modalCardReservationNationalId.textContent = reservation.nationalId;
+            modalCardReservationAccountNumber.textContent = reservation.accountNumber;
+            modalCardReservationPhoneNumber.textContent = reservation.phoneNumber;
+            modalCardReservationContactPhoneNumber.textContent = reservation.contactPhoneNumber || 'غير متوفر';
+            modalCardReservationPurchasePrice.textContent = window.formatDinar(reservation.purchasePrice);
+            modalCardReservationDate.textContent = reservation.reservationDate;
+            modalCardReservationNote.textContent = reservation.note || 'لا توجد ملاحظة';
+
+            cardReservationDetailsModal.style.display = 'flex'; // Show the modal
+        }
+
+        // Hides the card reservation details modal.
+        function hideCardReservationDetailsModal() {
+            cardReservationDetailsModal.style.display = 'none';
+        }
+
+        // --- Gemini Analysis Modal Functions ---
+        // Calls Gemini API to analyze transactions and displays the result in a modal.
+        async function analyzeTransactions() {
+            geminiAnalysisContent.innerHTML = '<p class="no-analysis">جاري تحليل المعاملات...</p>';
+            geminiAnalysisModal.style.display = 'flex';
+
+            if (window.transactions.length === 0) {
+                geminiAnalysisContent.innerHTML = '<p class="no-analysis">لا توجد معاملات لتحليلها.</p>';
+                return;
+            }
+
+            // Prepare transaction data for the LLM prompt
+            const transactionsData = JSON.stringify(window.transactions.map(t => ({
+                date: t.date,
+                type: t.type,
+                cardHolder: t.cardHolderName,
+                bank: t.bankName,
+                profit: t.profit,
+                usdAmount: t.usdAmount,
+                discountRate: t.discountRate,
+                usdSalePrice: t.usdSalePrice,
+                calculatedSalePrice: t.calculatedSalePrice
+            })));
+
+            const prompt = `
+            لدي سجل معاملات يتضمن بيانات مثل نوع المعاملة (شراء/بيع)، المبلغ، الربح/الخسارة، وتاريخ المعاملة. يرجى تحليل هذه المعاملات وتقديم ملخص لأدائي المالي. أرغب في معرفة:
+            - إجمالي الربح أو الخسارة.
+            - عدد معاملات الشراء والبيع.
+            - أي أنماط أو اتجاهات ملحوظة (مثل أشهر معينة أكثر ربحية، أو أنواع معاملات معينة).
+            - اقتراحات لتحسين الأداء المالي بناءً على هذه البيانات.
+
+            إليك بيانات المعاملات (بتنسيق JSON):
+            ${transactionsData}
+            `;
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will automatically provide the API key at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    geminiAnalysisContent.innerHTML = `<p>${text}</p>`;
+                } else {
+                    geminiAnalysisContent.innerHTML = '<p class="no-analysis">تعذر الحصول على تحليل من Gemini. يرجى المحاولة مرة أخرى.</p>';
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                geminiAnalysisContent.innerHTML = '<p class="no-analysis">حدث خطأ أثناء الاتصال بخدمة Gemini. يرجى التحقق من اتصالك بالإنترنت أو المحاولة لاحقاً.</p>';
+            }
+        }
+
+        // Hides the Gemini analysis modal.
+        function hideGeminiAnalysisModal() {
+            geminiAnalysisModal.style.display = 'none';
+        }
+
+        // --- Financial Tips Modal Functions ---
+        // Calls Gemini API to provide financial tips based on overall financial data.
+        async function getFinancialTips() {
+            financialTipsContent.innerHTML = '<p class="no-tips">جاري تحليل وضعك المالي وتقديم النصائح...</p>';
+            financialTipsModal.style.display = 'flex';
+
+            // Aggregate all relevant financial data for the LLM prompt
+            const financialData = {
+                currentCapital: window.currentCapital,
+                totalTransactionsProfit: window.transactions.reduce((sum, t) => sum + t.profit, 0),
+                totalIncome: window.expenses.filter(e => e.type === 'إيراد').reduce((sum, e) => sum + e.amount, 0),
+                totalExpenses: window.expenses.filter(e => e.type === 'مصروف').reduce((sum, e) => sum + e.amount, 0),
+                totalLibyanDinarDeposits: window.libyanDinarDeposits.reduce((sum, d) => sum + d.amount, 0),
+                numberOfCards: window.cards.length,
+                numberOfTransactions: window.transactions.length,
+                numberOfExpenses: window.expenses.length,
+                numberOfLibyanDinarDeposits: window.libyanDinarDeposits.length
+            };
+
+            const prompt = `
+            أنا أدير منظومة لتتبع رأس المال والمعاملات والمصروفات والإيرادات والإيداعات بالدينار الليبي. بناءً على البيانات المالية التالية، يرجى تقديم نصائح مالية عامة واقتراحات لتحسين إدارتي المالية.
+            إذا كانت هناك أي نقاط ضعف أو قوة واضحة، يرجى تسليط الضوء عليها.
+
+            إليك ملخص بياناتي المالية:
+            - رأس المال الحالي: ${financialData.currentCapital} د.ل
+            - مجموع المكاسب من المعاملات: ${financialData.totalTransactionsProfit} د.ل
+            - إجمالي الإيرادات الأخرى: ${financialData.totalIncome} د.ل
+            - إجمالي المصروفات الأخرى: ${financialData.totalExpenses} د.ل
+            - إجمالي الإيداعات بالدينار الليبي: ${financialData.totalLibyanDinarDeposits} د.ل
+            - عدد البطاقات المسجلة: ${financialData.numberOfCards}
+            - عدد المعاملات المسجلة: ${financialData.numberOfTransactions}
+            - عدد حركات المصروفات/الإيرادات الأخرى: ${financialData.numberOfExpenses}
+            - عدد إيداعات الدينار الليبي المسجلة: ${financialData.numberOfLibyanDinarDeposits}
+
+            الرجاء تقديم نصائحك وتحليلاتك بلغة عربية واضحة وموجزة.
+            `;
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will automatically provide the API key at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    financialTipsContent.innerHTML = `<p>${text}</p>`;
+                } else {
+                    financialTipsContent.innerHTML = '<p class="no-tips">تعذر الحصول على نصائح من Gemini. يرجى المحاولة مرة أخرى.</p>';
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API for financial tips:", error);
+                financialTipsContent.innerHTML = '<p class="no-tips">حدث خطأ أثناء الاتصال بخدمة Gemini. يرجى التحقق من اتصالك بالإنترنت أو المحاولة لاحقاً.</p>';
+            }
+        }
+
+        // Hides the financial tips modal.
+        function hideFinancialTipsModal() {
+            financialTipsModal.style.display = 'none';
+        }
+
+        // --- Modify Capital Modal Functions (New) ---
+        // Shows the modify capital modal and populates current capital.
+        function showModifyCapitalModal() {
+            currentCapitalInModal.textContent = window.formatDinar(window.currentCapital);
+            newCapitalAmountInput.value = window.currentCapital; // Pre-fill with current capital
+            capitalAdjustmentNoteInput.value = ''; // Clear note field
+            modifyCapitalModal.style.display = 'flex';
+        }
+
+        // Hides the modify capital modal.
+        function hideModifyCapitalModal() {
+            modifyCapitalModal.style.display = 'none';
+        }
+
+        // Handles updating the capital and logging the adjustment.
+        async function handleModifyCapital(event) {
+            event.preventDefault();
+
+            const newAmount = parseFloat(newCapitalAmountInput.value);
+            const adjustmentNote = capitalAdjustmentNoteInput.value.trim();
+
+            if (isNaN(newAmount) || newAmount < 0) {
+                window.displayMessage('الرجاء إدخال مبلغ رأس مال صحيح وموجب.', 'error');
+                return;
+            }
+
+            const oldAmount = window.currentCapital;
+            const difference = newAmount - oldAmount;
+            let adjustmentType = '';
+            let note = adjustmentNote;
+
+            if (difference > 0) {
+                adjustmentType = 'تعديل رأس المال - زيادة';
+                if (!note) note = 'زيادة في رأس المال';
+            } else if (difference < 0) {
+                adjustmentType = 'تعديل رأس المال - نقص';
+                if (!note) note = 'نقص في رأس المال';
+            } else {
+                window.displayMessage('رأس المال لم يتغير.', 'info');
+                hideModifyCapitalModal();
+                return;
+            }
+
+            try {
+                // Update the capital in Firestore
+                await updateCapital(newAmount);
+
+                // Log this adjustment as an expense/income for historical tracking
+                const adjustmentData = {
+                    date: new Date().toLocaleString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                    type: adjustmentType,
+                    amount: Math.abs(difference), // Store absolute amount
+                    note: note,
+                    timestamp: Date.now()
+                };
+                await addDoc(collection(db, `artifacts/${appId}/users/${userId}/expenses`), adjustmentData);
+
+                window.displayMessage('تم تحديث رأس المال بنجاح.', 'success');
+                hideModifyCapitalModal();
+                // renderExpenses() and updateExpenseSummaries() will be called by onSnapshot listener
+            } catch (e) {
+                console.error("Error modifying capital: ", e);
+                window.displayMessage('حدث خطأ أثناء تعديل رأس المال.', 'error');
+            }
+        }
+
+
+        // --- Print Function (Generic) ---
+        let originalBodyContent = ''; // To store original body content
+        let originalBodyOverflow = ''; // To store original body overflow style
+
+        // Handles printing a specific section or modal of the application.
+        function printSection(sectionId) {
+            const allSections = document.querySelectorAll('.form-section, .transactions-section, .card-management-section, .expense-log-section, .libyan-dinar-deposit-section, .card-reservation-history-section');
+            const targetSection = document.getElementById(sectionId);
+
+            // Store original display states and hide non-target sections
+            allSections.forEach(section => {
+                section.classList.add('no-print'); // Add no-print to all sections by default
+            });
+            targetSection.classList.remove('no-print'); // Remove no-print from target section
+
+            // Add 'no-print' class to elements that should never be printed
+            document.querySelectorAll('.navigation-buttons, .form-group button, .delete-btn, .modal-overlay, .capital-display, .card-form-buttons, .transaction-form-buttons, .expense-form-buttons, .libyan-dinar-deposit-form-buttons, .card-reservation-form-buttons, .print-button, #analyzeTransactionsButton, #getFinancialTipsButton, #userIdDisplay').forEach(el => {
+                el.classList.add('no-print');
+            });
+
+            window.print(); // Trigger the browser's print dialog
+
+            // Restore elements after printing
+            window.onafterprint = () => {
+                // Remove 'no-print' class from all elements
+                document.querySelectorAll('.no-print').forEach(el => {
+                    el.classList.remove('no-print');
+                });
+                // Re-hide sections that were not the target
+                allSections.forEach(section => {
+                    if (section.id !== sectionId) {
+                        section.style.display = 'none';
+                    }
+                });
+            };
+        }
+
+        // New function to print modal content
+        function printModal(modalId) {
+            const modalOverlay = document.getElementById(modalId);
+            const originalDisplayStates = {}; // Store original display states of all body children
+
+            // Store original display states of all direct children of body and hide them
+            Array.from(document.body.children).forEach(child => {
+                if (child.id !== modalId) { // Do not hide the target modal overlay
+                    originalDisplayStates[child.id || child.tagName] = child.style.display;
+                    child.style.display = 'none';
+                }
+            });
+
+            // Ensure the modal overlay is visible and styled for printing
+            modalOverlay.style.display = 'flex'; // Ensure it's visible
+            modalOverlay.classList.add('print-only-modal'); // Add a class for print-specific styles if needed
+
+            // Temporarily set body overflow to hidden to prevent scrollbars during print preview
+            originalBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+
+            window.print();
+
+            // Restore original display states after printing
+            window.onafterprint = () => {
+                // Restore body overflow
+                document.body.style.overflow = originalBodyOverflow;
+
+                // Restore display states of all direct children of body
+                Array.from(document.body.children).forEach(child => {
+                    if (child.id !== modalId) {
+                        child.style.display = originalDisplayStates[child.id || child.tagName];
+                    }
+                });
+                modalOverlay.classList.remove('print-only-modal'); // Remove print class
+                modalOverlay.style.display = 'none'; // Hide the modal again
+            };
+        }
+
+
+        // --- Event Listeners ---
+        // Navigation Buttons
+        navCardsButton.addEventListener('click', () => showSection('cardManagementSection'));
+        navCardReservationHistoryButton.addEventListener('click', () => showSection('cardReservationHistorySection'));
+        navLibyanDinarDepositButton.addEventListener('click', () => showSection('libyanDinarDepositSection'));
+        navTransactionFormButton.addEventListener('click', () => showSection('transactionFormSection'));
+        navTransactionsLogButton.addEventListener('click', () => showSection('transactionsLogSection'));
+        navExpensesButton.addEventListener('click', () => showSection('expenseLogSection'));
+        navModifyCapitalButton.addEventListener('click', showModifyCapitalModal); // New
+
+        // Card Management Form
+        cardRegistrationForm.addEventListener('submit', addCard);
+        clearCardFormButton.addEventListener('click', clearCardForm);
+
+        // Transaction Management Form
+        cardSelectionInput.addEventListener('change', updateSelectedCardDetails);
+        transactionForm.addEventListener('submit', addTransaction);
+
+        // Expense Management Form
+        expenseForm.addEventListener('submit', addExpense);
+        clearExpenseFormButton.addEventListener('click', clearExpenseForm);
+
+        // Libyan Dinar Deposit Management Form
+        libyanDinarDepositForm.addEventListener('submit', addLibyanDinarDeposit);
+        libyanDinarDepositCardSelection.addEventListener('change', updateSelectedLibyanDinarDepositCardDetails);
+        clearLibyanDinarDepositFormButton.addEventListener('click', clearLibyanDinarDepositForm);
+
+        // Card Reservation History Form
+        cardReservationForm.addEventListener('submit', addCardReservation);
+        cardReservationCardSelection.addEventListener('change', updateSelectedCardReservationDetails);
+        clearCardReservationFormButton.addEventListener('click', clearCardReservationForm);
+
+        // Gemini Analysis Button
+        analyzeTransactionsButton.addEventListener('click', analyzeTransactions);
+
+        // Financial Tips Button
+        getFinancialTipsButton.addEventListener('click', getFinancialTips);
+
+
+        // Modal Close Buttons
+        modalCardDetailsCloseButton.addEventListener('click', hideCardDetailsModal);
+        modalTransactionDetailsCloseButton.addEventListener('click', hideTransactionDetailsModal);
+        modalExpenseDetailsCloseButton.addEventListener('click', hideExpenseDetailsModal);
+        modalLibyanDinarDepositDetailsCloseButton.addEventListener('click', hideLibyanDinarDepositDetailsModal);
+        modalCardReservationDetailsCloseButton.addEventListener('click', hideCardReservationDetailsModal);
+        modalGeminiAnalysisCloseButton.addEventListener('click', hideGeminiAnalysisModal);
+        modalFinancialTipsCloseButton.addEventListener('click', hideFinancialTipsModal);
+        modalModifyCapitalCloseButton.addEventListener('click', hideModifyCapitalModal); // New
+        modifyCapitalForm.addEventListener('submit', handleModifyCapital); // New
+
+
+        // --- Firebase Initialization and Data Listeners ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            window.createMessageModal();
+            window.createConfirmModal();
+            
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        userIdDisplay.textContent = `معرف المستخدم: ${userId}`;
+                        isAuthReady = true;
+                        console.log("Firebase Auth Ready. User ID:", userId);
+                        
+                        // Fetch initial capital or set to default if not exists
+                        const capitalDocRef = doc(db, `artifacts/${appId}/users/${userId}/appState/capital`);
+                        const capitalDocSnap = await getDoc(capitalDocRef);
+                        if (capitalDocSnap.exists()) {
+                            window.currentCapital = capitalDocSnap.data().value;
+                        } else {
+                            await setDoc(capitalDocRef, { value: 10000.00 }); // Set initial capital
+                            window.currentCapital = 10000.00;
+                        }
+                        updateCapitalDisplay();
+
+                        // Set up real-time listeners for all collections
+                        onSnapshot(collection(db, `artifacts/${appId}/users/${userId}/cards`), (snapshot) => {
+                            window.cards = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            renderCards();
+                            populateCardSelection();
+                            populateCardSelectionForLibyanDinarDeposit();
+                            populateCardSelectionForCardReservationHistory();
+                            console.log("Cards updated from Firestore:", window.cards);
+                        });
+
+                        onSnapshot(collection(db, `artifacts/${appId}/users/${userId}/transactions`), (snapshot) => {
+                            window.transactions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            renderTransactions();
+                            updateTotalProfitDisplay();
+                            console.log("Transactions updated from Firestore:", window.transactions);
+                        });
+
+                        onSnapshot(collection(db, `artifacts/${appId}/users/${userId}/expenses`), (snapshot) => {
+                            window.expenses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            renderExpenses();
+                            updateExpenseSummaries();
+                            console.log("Expenses updated from Firestore:", window.expenses);
+                        });
+
+                        onSnapshot(collection(db, `artifacts/${appId}/users/${userId}/libyanDinarDeposits`), (snapshot) => {
+                            window.libyanDinarDeposits = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            renderLibyanDinarDeposits();
+                            updateLibyanDinarDepositSummaries();
+                            console.log("Libyan Dinar Deposits updated from Firestore:", window.libyanDinarDeposits);
+                        });
+
+                        onSnapshot(collection(db, `artifacts/${appId}/users/${userId}/cardReservationHistory`), (snapshot) => {
+                            window.cardReservationHistory = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            renderCardReservationHistory();
+                            updateCardReservationHistorySummaries();
+                            console.log("Card Reservation History updated from Firestore:", window.cardReservationHistory);
+                        });
+
+                    } else {
+                        // Sign in anonymously if no user is authenticated
+                        if (typeof __initial_auth_token !== 'undefined') {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    }
+                });
+
+            } catch (e) {
+                console.error("Error initializing Firebase or signing in: ", e);
+                userIdDisplay.textContent = "خطأ في الاتصال بقاعدة البيانات.";
+                window.displayMessage('حدث خطأ في الاتصال بقاعدة البيانات. يرجى التحقق من إعدادات Firebase.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>
